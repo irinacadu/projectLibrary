@@ -72,16 +72,16 @@ public class User {
 
 
     // ESTA RELACION DA ERROR
-    // @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "idUser")
-    // private Opinion Opinion;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "idUser")
+    private List<Opinion> opinion;
 
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "user")
     private List<Book> book;
 
     // ESTA DA ERROR
-    // @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "idUser")
-    // private List<Prestamo> prestamo;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "idUser")
+    private List<Prestamo> prestamo;
     
     
 }

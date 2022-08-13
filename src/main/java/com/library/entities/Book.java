@@ -8,7 +8,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
@@ -36,8 +38,8 @@ private String author;
 private String sinopsis;
 private String photo;
 
-
-private String opinion;
+@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST, mappedBy = "idBook")
+private List<Opinion> opiniones;
 
 @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
 private User user;
@@ -45,8 +47,8 @@ private User user;
 @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
 private Catalogue catalogue;
 
-// @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "idBook")
-// private Prestamo prestamo;
+@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+private Prestamo prestamo;
 
     
 }

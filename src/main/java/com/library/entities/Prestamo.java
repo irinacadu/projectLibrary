@@ -3,25 +3,40 @@ package com.library.entities;
 import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
-import org.hibernate.annotations.ManyToAny;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Prestamo {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private LocalDate deliveryDate;
     private LocalDate dueDate;
 
+   
 
-   // @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "prestamo")
-//    @ManyToMany
-//     private Book idBook;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private Book idBook;
 
-    // @ManyToOne
-    // private User idUser;
+    @ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.PERSIST )
+    private User idUser;
 
 }

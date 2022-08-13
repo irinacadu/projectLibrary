@@ -37,5 +37,5 @@ public class Catalogue {
     private String author;
     
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "catalogue")
-    private List<Book>books;
+    private List<Book> books;
 }
