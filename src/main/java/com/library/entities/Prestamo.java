@@ -34,9 +34,9 @@ public class Prestamo {
    
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private Book idBook;
+    private Book book;
 
     @ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.PERSIST )
-    private User idUser;
+    private User user;
 
 }

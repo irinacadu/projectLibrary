@@ -38,17 +38,13 @@ private String author;
 private String sinopsis;
 private String photo;
 
-@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST, mappedBy = "idBook")
+@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST, mappedBy = "book")
 private List<Opinion> opiniones;
 
 @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
 private User user;
 
-@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
-private Catalogue catalogue;
 
-@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-private Prestamo prestamo;
 
     
 }

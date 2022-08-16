@@ -29,9 +29,9 @@ public class Opinion {
     private String opinion;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private Book idBook;
+    private Book book;
 
-    @ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.PERSIST )
-    private User idUser;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private User user;
 
 }

@@ -72,7 +72,7 @@ public class User {
 
 
     // ESTA RELACION DA ERROR
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "idUser")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "user")
     private List<Opinion> opinion;
 
 
@@ -80,7 +80,7 @@ public class User {
     private List<Book> book;
 
     // ESTA DA ERROR
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "idUser")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "user")
     private List<Prestamo> prestamo;
     
     
