@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,15 +30,22 @@ public class Prestamo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate deliveryDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dueDate;
 
    
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private Book book;
 
-    @ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.PERSIST )
+    @ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.MERGE )
     private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.MERGE )
+     private User user2;
 
 }

@@ -11,7 +11,7 @@ import javax.persistence.Id;
 
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,19 +31,20 @@ public class Book {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private int id; 
-private String availability;
+//private String availability;
 private String title;
-private String genre;
 private String author;
 private String sinopsis;
 private String photo;
 
-@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST, mappedBy = "book")
-private List<Opinion> opiniones;
+@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.MERGE, mappedBy = "book")
+private List<Opinion> opinions;
 
-@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
 private User user;
 
+@ManyToOne
+private Genre genre;
 
 
     

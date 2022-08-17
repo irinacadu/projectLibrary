@@ -12,11 +12,9 @@ import javax.persistence.Id;
 
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+
 import javax.validation.constraints.NotEmpty;
 
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -39,49 +37,51 @@ public class User {
     private int id;
 
     @NotEmpty
-    @Size(min=2 , max =30, message="La longitud del nombre debe estar entre 2 y 3 caracteres")
+   // @Size(min=2 , max =30, message="La longitud del nombre debe estar entre 2 y 3 caracteres")
     private String name;
 
     @NotEmpty
-    @Size(min=8, max=40, message = "La longitud de los apellidos debe estar entre 8 y 40 caracteres")
+    //@Size(min=8, max=40, message = "La longitud de los apellidos debe estar entre 8 y 40 caracteres")
     private String surname;
 
     @NotEmpty
-    @Size(min=10, max=50 , message="La longitud del mail debe estar entre 10 y 50 caracteres")
+   // @Size(min=10, max=50 , message="La longitud del mail debe estar entre 10 y 50 caracteres")
     @Email
     private String email;
 
     @NotEmpty
-    @Size(min=9, max=13, message="La longitud del telefono no es correcta.")
+   // @Size(min=9, max=13, message="La longitud del telefono no es correcta.")
     private String phone;
 
-    @NotEmpty
+  
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaNacimiento;
 
     @NotEmpty
-    @Size(min=5,max=15, message= "La longitud del nombre de usuario debe estar entre 5 y 15 caracteres")
+   // @Size(min=5,max=15, message= "La longitud del nombre de usuario debe estar entre 5 y 15 caracteres")
     private String userName; 
 
 
     @NotEmpty
-    @Size(min=8,max=15, message= "La longitud del nombre de usuario debe estar entre 8 y 15 caracteres")
-    @NotBlank(message="La contraseña  no puede estar vacía")     
-    @Pattern(regexp="^[0-9]{1,2}$",message="Edad incorrecta")    
+   // @Size(min=8,max=15, message= "La longitud del nombre de usuario debe estar entre 8 y 15 caracteres")
+   // @NotBlank(message="La contraseña  no puede estar vacía")     
+    //@Pattern(regexp="^[0-9]{1,2}$",message="Edad incorrecta")    
     private String password;
 
 
     // ESTA RELACION DA ERROR
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user")
     private List<Opinion> opinion;
 
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user")
     private List<Book> book;
 
     // ESTA DA ERROR
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "user")
-    private List<Prestamo> prestamo;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user")
+    private List<Prestamo> prestamoPrestador;
     
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user2")
+    private List<Prestamo> prestamoPrestado;
     
 }

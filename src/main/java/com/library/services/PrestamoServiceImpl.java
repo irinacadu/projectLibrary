@@ -16,13 +16,13 @@ public class PrestamoServiceImpl implements IServicePrestamo {
 
     @Override
     public List<Prestamo> getPrestamos() {
-        // TODO Auto-generated method stub
+       
         return prestamoDao.findAll();
     }
 
     @Override
     public Prestamo getPrestamo(int idPrestamo) {
-        // TODO Auto-generated method stub
+    
         return prestamoDao.findById(idPrestamo).get();
     }
 
@@ -39,7 +39,7 @@ public class PrestamoServiceImpl implements IServicePrestamo {
 
     @Override
     public void update(int idPrestamo) {
-        // TODO Auto-generated method stub
+       
         
     }
     
