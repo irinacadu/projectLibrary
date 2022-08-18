@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+</head>
+<body>
+
+   
+<h1>Listado de Estudiantes</h1>
+
+        <table border="2">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <tr th:each="estudiante : ${listadoEstudiantes}">
+                    <td th:text="${estudiante.id}"></td>
+                    <td th:text="${estudiante.nombre}"></td>
+                    <td th:text="${estudiante.apellidos}"></td>
+                    <td><a th:href="@{/detalles/} + ${estudiante.id}"> Detalles </a></td>
+                    <td><a th:href="@{/modificar/} + ${estudiante.id}"> Modificar </a></td>
+                </tr>     
+                
+               
+            </tbody>
+
+
+    
+</body>
+</html>

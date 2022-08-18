@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.library.entities.Book;
 import com.library.entities.Genre;
@@ -19,14 +20,11 @@ import com.library.services.IServicePrestamo;
 import com.library.services.IServiceUser;
 
 @SpringBootApplication
-public class ProjectLibraryApplication {
+public class ProjectLibraryApplication implements WebMvcConfigurer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjectLibraryApplication.class, args);
 	}
-
-
-
 	@Bean
     public CommandLineRunner demoData(IServiceUser userSrv, IServiceBook bookSrv, 
 	IServiceOpinion opinionSrv, IServicePrestamo prestamoSrv, IServiceGenre genreSrv){
