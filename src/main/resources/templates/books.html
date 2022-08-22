@@ -19,13 +19,12 @@
             <th>Borrar</th>
         </tr>
     </thead>
-    <tbody th:each=" user : ${listaLibros}">
-        <td th:text="${book.id}"></td>
+    <tbody th:each=" book : ${listaLibros}">
         <td th:text="${book.title}"></td>
         <td th:text="${book.author}"></td>
-        <td><a th:href="@{/details} + ${book.id}"></a></td>
-        <td><a href="@{/update} + ${book.id}"></a></td>
-        <td><a href="@{/delete} + ${book.id}"></a></td>
+        <td><a th:href="@{/details/} + ${book.id}">Ver</a></td>
+        <td><a href="@{/update/} + ${book.id}">Ver</a></td>
+        <td><a href="@{/delete/} + ${book.id}">Ver</a></td>
 
     </tbody>
    </table>
