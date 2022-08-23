@@ -22,7 +22,7 @@ public class UserServiceImpl implements IServiceUser {
 
     @Override
     public User getUser(int idUser) {
-        // TODO Auto-generated method stub
+     
         return userDao.findById(idUser).get();
     }
 
@@ -40,7 +40,7 @@ public class UserServiceImpl implements IServiceUser {
 
     @Override
     public void update(int idUser) {
-        // TODO Auto-generated method stub
+        
         
     }
     

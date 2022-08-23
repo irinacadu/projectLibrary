@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan form</title>
+</head>
+<body>
+    <form th:object="${loan}" th:action="@{/createloan}" method="post">
+
+        <input type="hidden" th:field="*{id}" id="id" name="id" >
+        <input type="date" th:field="*{deliveryDate}" id="deliveryDate" th:text="${loan.deliveryDate}" name="deliveryDate">
+        <input type="date" th:field="*{dueDate}" id="dueDate" th:text="${loan.dueDate}" name="dueDate">
+        <input type="text" th:field="*{book}" id="book" name="book" th:text="${loan.book}">
+        <input type="text" th:field="*{user}" id="user" name="user" th:text="${loan.user}">
+        <input type="text" th:field="*{user2}" id="user2" name="user2" th:text="${loan.user2}">
+        <input type="submit" value="Enviar" name="enviar" required>
+    </form>
+</body>
+</html>

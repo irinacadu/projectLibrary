@@ -1,71 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head th:replace="baseTemplate::cabecera">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script th:fragment="baseTemplate :: javascriptsupport" defer></script>
-    <link href="css/main.css"  rel="stylesheet" type="text/css"  >
+    <link href="css/main.css" rel="stylesheet" type="text/css">
     <title>User form</title>
 </head>
+
 <body>
-    <!-- <div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
-        <div class="wrapper wrapper--w680">
-            <div class="card card-1">
-                <div class="card-heading"></div>
-                <div class="card-body">
-                    <h2 class="title">Registration Info</h2>
-                    <form method="POST">
-                        <div class="input-group">
-                            <input class="input--style-1" type="text" placeholder="NAME" name="name">
-                        </div>
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <input class="input--style-1 js-datepicker" type="text" placeholder="BIRTHDATE" name="birthday">
-                                    <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <div class="rs-select2 js-select-simple select--no-search">
-                                        <select name="gender">
-                                            <option disabled="disabled" selected="selected">GENDER</option>
-                                            <option>Male</option>
-                                            <option>Female</option>
-                                            <option>Other</option>
-                                        </select>
-                                        <div class="select-dropdown"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <div class="rs-select2 js-select-simple select--no-search">
-                                <select name="class">
-                                    <option disabled="disabled" selected="selected">CLASS</option>
-                                    <option>Class 1</option>
-                                    <option>Class 2</option>
-                                    <option>Class 3</option>
-                                </select>
-                                <div class="select-dropdown"></div>
-                            </div>
-                        </div>
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <input class="input--style-1" type="text" placeholder="REGISTRATION CODE" name="res_code">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-t-20">
-                            <button class="btn btn--radius btn--green" type="submit">Submit</button>
-                        </div>
-                    </form>
+    <div class="main">
+        <div class="container ">
+            <form th:object="${user}" th:action="@{/createuser}" method="post" enctype="multipart/form-data">
+                <div class="row justify-content-evenly">
+                    <div class="col-4">
+                        <label for="name">Name</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="hidden" th:field="*{id}" id="id" name="id">
+                        <input type="text" th:field="*{name}" id="name" th:text="${user.name}" name="name">
+                        
+                    </div>
                 </div>
-            </div>
-        </div>
+                <div class="row justify-content-evenly">
+                    <div class="col-4">
+                        <label for="surname">Surname</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" th:field="*{surname}" id="surname" name="surname" th:text="${user.surname}">
+                    </div>
+                </div>
+                <div class="row justify-content-evenly">
+                    <div class="col-4">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="email" th:field="*{email}" id="email" name="email" th:text="${user.email}">
+                    </div>
+                </div>
+                <div class="row justify-content-evenly">
+                    <div class="col-4">
+                        <label for="phone">Phone</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" th:field="*{phone}" id="phone" name="phone" th:text="${user.phone}">
+                    </div>
+                </div>
+                <div class="row justify-content-evenly">
+                    <div class="col-4">
+                        <label for="birthDate">Birthday</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="date" id="birthDate" th:field="*{birthDate}" name="birthDate" th:text="${user.birthDate}">
+                    </div>
+                </div>
+                <div class="row justify-content-evenly">
+                    <div class="col-4">
+                        <label for="username">Username</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" th:field="*{userName}" id="username" name="username" th:text="${user.userName}">
+                    </div>
+                </div>
+                <div class="row justify-content-evenly">
+                    <div class="col-4">
+                        <label for="password">Pasword</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="password" id="password" th:field="*{password}" name="password" th:text="${user.password}">
+                    </div>
+                </div>
+                <!-- <div class="row justify-content-evenly">
+                    <div class="col-4">
+                        <label for="repeatPassword"> Repeat password</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="password" id="repeatPassword" name="repeatPassword">
+                    </div>
+                </div> -->
+                <div class="row justify-content-evenly">
+                    <div class="col-4">
+                        <label for="photo">Your photo</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="file" id="image" name="image">
+                    </div>
+                </div>
+                <div class="row justify-content-evenly">
+                    <div class="col-4">
+                        <input type="submit" value="Enviar" name="enviar" required>
+                        <!-- <button type="button" class="btn btn-primary">Enviar</button> -->
+                    </div>
+                </div>
+       
+        </form>
     </div>
-     -->
 </body>
+
 </html>

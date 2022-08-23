@@ -9,7 +9,7 @@
 <body>
 
    
-<h1>Listado de Estudiantes</h1>
+<h1>Listado de Usuarios</h1>
 
         <table border="2">
             <thead>
@@ -21,12 +21,19 @@
             </thead>
             
             <tbody>
-                <tr th:each="estudiante : ${listadoEstudiantes}">
-                    <td th:text="${estudiante.id}"></td>
-                    <td th:text="${estudiante.nombre}"></td>
-                    <td th:text="${estudiante.apellidos}"></td>
-                    <td><a th:href="@{/detalles/} + ${estudiante.id}"> Detalles </a></td>
-                    <td><a th:href="@{/modificar/} + ${estudiante.id}"> Modificar </a></td>
+                <tr th:each="user : ${userslist}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.surname}"></td>
+<td th:text="${user.birthDate}"></td>
+<td th:text="${user.email}"></td>
+<td th:text="${user.userName}"></td>
+<td th:text="${user.phone}"></td>
+<td th:text="${user.password}"></td>
+
+                    <td><a th:href="@{/details/} + ${user.id}"> Detalles </a></td>
+                    <td><a th:href="@{/update/} + ${user.id}"> Modificar </a></td>
+<td><a th:href="@{/delete/} + ${user.id}"> Eliminar </a></td>
                 </tr>     
                 
                

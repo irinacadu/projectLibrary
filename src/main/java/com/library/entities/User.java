@@ -53,9 +53,11 @@ public class User {
    // @Size(min=9, max=13, message="La longitud del telefono no es correcta.")
     private String phone;
 
+    private String photo;
+
   
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate fechaNacimiento;
+    private LocalDate birthDate;
 
     @NotEmpty
    // @Size(min=5,max=15, message= "La longitud del nombre de usuario debe estar entre 5 y 15 caracteres")
@@ -79,9 +81,9 @@ public class User {
 
     // ESTA DA ERROR
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user")
-    private List<Prestamo> prestamoPrestador;
+    private List<Loan> prestamoPrestador;
     
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user2")
-    private List<Prestamo> prestamoPrestado;
+    private List<Loan> prestamoPrestado;
     
 }
