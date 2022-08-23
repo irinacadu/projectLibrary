@@ -5,9 +5,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -37,6 +36,7 @@ public class BookController {
 
     @GetMapping("/catalogue")
     public String getBooks(Model model) {
+
         model.addAttribute("listaLibros", bookService.getBooks());
 
         return "books";
@@ -68,7 +68,7 @@ public class BookController {
         Book book = bookService.getBook(Integer.parseInt(id));
         List<Opinion> opinions = opinionService.getOpiniones();
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("uploadBook");
+        mav.setViewName("bookForm");
         mav.addObject("book", book);
         mav.addObject("opinion", opinions);
 
@@ -76,7 +76,6 @@ public class BookController {
      }
 
      @PostMapping("/createBook")
-
      public String createBook(@ModelAttribute(name = "estudiante") Book book, 
      @RequestParam(name = "imagen", required = false) MultipartFile foto) {
  
@@ -98,30 +97,14 @@ public class BookController {
          bookService.save(book);
          return "redirect:/catalogue";
      }
-     @GetMapping("/deleteBook/{id}")
-     public ModelAndView delete(@PathVariable(name = "id") String idBook) {
-       
-        Book book = bookService.getBook(Integer.parseInt(idBook));
-        List<Opinion> opinions = opinionService.getOpiniones();
-        ModelAndView mav = new ModelAndView();
-       
 
-        if (book != null) {
+    @GetMapping("/deletebook/{id}")
+    public String deleteBook(@PathVariable(name = "id") String id) {
 
-            try {
-                bookService.delete(Integer.parseInt(idBook));
-            } catch (Exception e) {
-              
-            } 
+        bookService.delete(Integer.parseInt(id));
 
-        } else {
-            mav.setViewName("catalogue");
-            mav.addObject("book", book);
-            mav.addObject("opinion", opinions);
+        return "redirect:/catalogue";
 
     }
-    return mav;
-}
-     
 
 }
