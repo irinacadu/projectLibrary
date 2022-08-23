@@ -10,4 +10,5 @@ public interface IServiceBook {
     public void save (Book book);
     public void delete (int idBook);
     public void update (int idBook);
+    public boolean reserva(int idBook);
 }

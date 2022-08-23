@@ -1,13 +1,23 @@
 package com.library.controllers;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.library.entities.Book;
@@ -30,6 +40,14 @@ public class BookController {
         model.addAttribute("listaLibros", bookService.getBooks());
 
         return "books";
+    }
+
+    @GetMapping("/formulario")
+    public String showFormulario(ModelMap map) {
+        map.addAttribute("book", new Book());
+        map.addAttribute("opinions", opinionService.getOpiniones());
+
+        return "bookForm";
     }
 
     @GetMapping("/details/{id}")
@@ -56,6 +74,54 @@ public class BookController {
 
         return mav;
      }
+
+     @PostMapping("/createBook")
+
+     public String createBook(@ModelAttribute(name = "estudiante") Book book, 
+     @RequestParam(name = "imagen", required = false) MultipartFile foto) {
+ 
+         if (foto != null) {
+             String rutaAbsoluta = "C://Users//mrubiolo//OneDrive - Capgemini//Documents//recursos";
+             Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + foto.getOriginalFilename());
+            
+             try {
+                 
+                 byte[] bytesFoto = foto.getBytes();
+                 Files.write(rutaCompleta, bytesFoto);
+                 book.setPhoto(foto.getOriginalFilename());
+                 bookService.save(book);
+ 
+             } catch (Exception e) {
+                 e.printStackTrace();
+             }
+         }
+         bookService.save(book);
+         return "redirect:/catalogue";
+     }
+     @GetMapping("/deleteBook/{id}")
+     public ModelAndView delete(@PathVariable(name = "id") String idBook) {
+       
+        Book book = bookService.getBook(Integer.parseInt(idBook));
+        List<Opinion> opinions = opinionService.getOpiniones();
+        ModelAndView mav = new ModelAndView();
+       
+
+        if (book != null) {
+
+            try {
+                bookService.delete(Integer.parseInt(idBook));
+            } catch (Exception e) {
+              
+            } 
+
+        } else {
+            mav.setViewName("catalogue");
+            mav.addObject("book", book);
+            mav.addObject("opinion", opinions);
+
+    }
+    return mav;
+}
      
 
 }

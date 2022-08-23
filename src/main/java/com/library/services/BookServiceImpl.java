@@ -45,4 +45,12 @@ public class BookServiceImpl implements IServiceBook {
 
     }
 
+    @Override
+    public boolean reserva(int idBook) {
+        
+        return false;
+    }
+
+   
+
 }
