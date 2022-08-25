@@ -1,12 +1,75 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+<head th:fragment="cabecera">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/userReg.css">
+
+    <title>User Registration</title>
 </head>
+
+
+
 <body>
-    hola
+   
+    <!-- Registration Form -->
+
+    <div class="container">
+        <form action="" id="formBookReg">
+            <div class="card" style="border: 2px;">
+
+                <div class="card-body">
+                    <div class="card-header">
+                        Book Registration Form
+                    </div>
+                    <br>
+                    <form th:object="${book}" th:action="@{/formulario}" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col">
+                                <label for="inputTitle">Title</label>
+                                <input type="text" th:field="*{title}" class="form-control" placeholder="Title" id="title" required>
+                            </div>
+                            <div class="col">
+                                <label for="inputAuthor">Author</label>
+                                <input type="text" th:field="*{author}" class="form-control" placeholder="Author" id="author" required>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col">
+                                <label for="inputSynopsis">Synopsis</label>
+                                <input type="text" th:field="*{sinopsis}" class="form-control" placeholder="Synopsis" id="synopsis" required>
+                        </div>
+                        <p></p>
+                        <div class="container">
+                            <button type="submit" class="btn btn-primary">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <!-- NO BORRAR -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
 </body>
+
 </html>
