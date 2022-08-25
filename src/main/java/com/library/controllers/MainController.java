@@ -3,7 +3,7 @@ package com.library.controllers;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,13 +20,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.library.entities.Book;
 import com.library.entities.Loan;
-import com.library.entities.Opinion;
+
 import com.library.entities.User;
 import com.library.services.IServiceBook;
 import com.library.services.IServiceLoan;
 import com.library.services.IServiceOpinion;
 import com.library.services.IServiceUser;
-import com.library.services.OpinionServiceImpl;
+
 
 @Controller
 @RequestMapping("/")
@@ -112,7 +112,7 @@ public class MainController {
 
          mav.setViewName("personalUsuarioProv");
          mav.addObject("user", user);
-         mav.addObject("book", book);
+        // mav.addObject("book", book);
 
          return mav;
      
@@ -159,7 +159,7 @@ public class MainController {
     }
 
     @GetMapping("/loanslist")
-    public String getEstudiantes(Model model) {
+    public String getLoans(Model model) {
         model.addAttribute("loanlist", loanService.getLoans());
         return "loanslist";
     }

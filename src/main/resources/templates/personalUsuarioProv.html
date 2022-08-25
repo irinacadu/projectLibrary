@@ -10,9 +10,10 @@
 <h1>SELECT</h1>
 
     <form method="post" th:object="${user}" th:action="@{/createloan}">
+        <!-- <div th:object="${book}"> -->
         
-            Id Usuario <input type="text" th:text = "${user.id}" name ="id" readonly>
-            Nombre Usuario <input type="text" th:text = "${user.name}" name ="id" readonly>
+            Id Usuario <p th:text = "${user.id}" name ="id" readonly></p>
+            Nombre Usuario <p th:text = "${user.name}" name ="id" readonly></p>
             
 
         <table border="1">
@@ -25,14 +26,15 @@
                     <th>Borrar</th>
                 </tr>
             </thead>
-            <tbody th:each=" book : ${listaLibros}">
+            <!-- <tbody th:each=" book : ${listaLibros}">
                 <td th:text="${book.title}"></td>
                 <td th:text="${book.author}"></td>
-                <!-- <td><a th:href="@{/newloan/} + ${book.id}">Seleccionar</a></td> -->
+                <td><a th:href="@{/newloan/} + ${book.id}">Seleccionar</a></td>
             
         
             </tbody>
            </table>
+        </div> -->
         <input type="submit" value="Enviar" name="enviar" required>
     </form>
 </body>

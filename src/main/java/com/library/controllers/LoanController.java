@@ -11,17 +11,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.library.entities.Book;
 import com.library.entities.Loan;
+import com.library.entities.User;
 import com.library.services.IServiceLoan;
 
 @Controller
 @RequestMapping("/loan")
 public class LoanController {
 
-    
     @Autowired
     private IServiceLoan loanService;
-    
+
     @GetMapping("/loanform")
     public String loanform(ModelMap map) {
 
@@ -29,14 +30,18 @@ public class LoanController {
 
     }
 
-    @GetMapping("/loanslist")
-    public String getEstudiantes(Model model) {
+    @GetMapping("/loanslist/{userid}/{bookid}")
+    public String getLoans(Model model, @PathVariable(name = "userid", required = false) int userId,
+            @PathVariable(name = "bookId", required = false) int bookId) {
         model.addAttribute("loanlist", loanService.getLoans());
         return "loanslist";
     }
 
     @PostMapping("/createloan")
-    public String createLoan(@ModelAttribute(name="loan") Loan loan) {
+    public String createLoan(@ModelAttribute(name = "loan") Loan loan,
+            @ModelAttribute(name = "user") User user,  @ModelAttribute(name = "book") Book book) {
+
+                
 
         loanService.save(loan);
         return "redirect:/loansList";
@@ -50,7 +55,7 @@ public class LoanController {
 
         mav.setViewName("loandetails");
         mav.addObject("loan", loan);
-        
+
         return mav;
     }
 
