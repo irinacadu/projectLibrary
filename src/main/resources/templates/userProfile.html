@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head th:fragment="cabecera">
+<head th:fragment="cabecera">
 
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -57,25 +57,40 @@
                     </div>
                     <div class="card-body pt-0">
                       <table class="table table-bordered">
+                        <thead>
                         <tr>
                           <th>Cover</th>
                           <th>Title</th>
-                          <th>Author</th>
+                          <th>Author</th>                          
+                        </tr>
+                        </thead>
+                        <tbody>
+                          <tr th:each="user : ${userslist}">
+                            <td th:text="${user.id}"></td>
+                            <td th:text="${user.name}"></td>
+                            <td th:text="${user.surname}"></td>
+                            <td th:text="${user.birthDate}"></td>
+                            <td th:text="${user.email}"></td>
+                            <td th:text="${user.userName}"></td>
+                            <td th:text="${user.phone}"></td>
+                            <td th:text="${user.password}"></td>
+                        </tbody>
+
                       </table>
                     </div>
                   </div>
 
 
 
-                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- partial -->
-
         </div>
+        <!-- partial -->
+
       </div>
+    </div>
     </div>
   </section>
 
