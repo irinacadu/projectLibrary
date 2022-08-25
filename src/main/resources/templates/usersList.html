@@ -21,23 +21,23 @@
             </thead>
             
             <tbody>
-                <tr th:each="user : ${userslist}">
-                    <td th:text="${user.id}"></td>
-                    <td th:text="${user.name}"></td>
-                    <td th:text="${user.surname}"></td>
+            <tr th:each="user : ${userslist}">
+<td th:text="${user.id}"></td>
+<td th:text="${user.name}"></td>
+ <td th:text="${user.surname}"></td>
 <td th:text="${user.birthDate}"></td>
 <td th:text="${user.email}"></td>
 <td th:text="${user.userName}"></td>
 <td th:text="${user.phone}"></td>
 <td th:text="${user.password}"></td>
 
-                    <td><a th:href="@{/details/} + ${user.id}"> Detalles </a></td>
-                    <td><a th:href="@{/update/} + ${user.id}"> Modificar </a></td>
+<td><a th:href="@{/details/} + ${user.id}"> Detalles </a></td>
+<td><a th:href="@{/update/} + ${user.id}"> Modificar </a></td>
 <td><a th:href="@{/delete/} + ${user.id}"> Eliminar </a></td>
-                </tr>     
-                
-               
-            </tbody>
+<td><a th:href="@{/newloan/} + ${user.id}"> Seleccionar Usuario </a></td>
+ </tr> 
+
+ </tbody>
 
 
     

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provisional user</title>
+</head>
+<body>
+<h1>SELECT</h1>
+
+    <form method="post" th:object="${user}" th:action="@{/createloan}">
+        
+            Id Usuario <input type="text" th:text = "${user.id}" name ="id" readonly>
+            Nombre Usuario <input type="text" th:text = "${user.name}" name ="id" readonly>
+            
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Detalles</th>
+                    <th>Modificar</th>
+                    <th>Borrar</th>
+                </tr>
+            </thead>
+            <tbody th:each=" book : ${listaLibros}">
+                <td th:text="${book.title}"></td>
+                <td th:text="${book.author}"></td>
+                <!-- <td><a th:href="@{/newloan/} + ${book.id}">Seleccionar</a></td> -->
+            
+        
+            </tbody>
+           </table>
+        <input type="submit" value="Enviar" name="enviar" required>
+    </form>
+</body>
+</html>

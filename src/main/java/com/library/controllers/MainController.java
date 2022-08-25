@@ -3,6 +3,7 @@ package com.library.controllers;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.library.entities.Book;
 import com.library.entities.Loan;
+import com.library.entities.Opinion;
 import com.library.entities.User;
+import com.library.services.IServiceBook;
 import com.library.services.IServiceLoan;
+import com.library.services.IServiceOpinion;
 import com.library.services.IServiceUser;
+import com.library.services.OpinionServiceImpl;
 
 @Controller
 @RequestMapping("/")
@@ -31,6 +37,12 @@ public class MainController {
 
     @Autowired
     private IServiceLoan loanService;
+
+    @Autowired
+    private IServiceBook bookService;
+
+    @Autowired
+    IServiceOpinion opinionService;
 
     /* USER CONTROLLER */
 
@@ -81,7 +93,33 @@ public class MainController {
 
     }
 
-    @GetMapping("/details/{id}")
+   @PostMapping("/createloan")
+   public String creatLoan(@ModelAttribute(name = "loan")Loan loan){
+
+    loanService.save(loan);
+
+    return "redirect:/loanslist";
+
+   }
+
+    @GetMapping("/newloan/{id}")
+    public ModelAndView newLoan(@PathVariable(name ="id") int id, Model model) {
+        model.addAttribute("listaLibros", bookService.getBooks());
+        User user = userService.getUser(id);
+        Book book = bookService.getBook(id);
+
+        ModelAndView mav = new ModelAndView();
+
+         mav.setViewName("personalUsuarioProv");
+         mav.addObject("user", user);
+         mav.addObject("book", book);
+
+         return mav;
+     
+
+    }
+
+    @GetMapping("/detailsuser/{id}")
     public ModelAndView detailsUser(@PathVariable(name = "id") int id) {
         User user = userService.getUser(id);
         ModelAndView mav = new ModelAndView();
@@ -112,7 +150,7 @@ public class MainController {
 
     }
 
-    /* LOAN CONTROLLER */
+    /*******************************************************LOAN CONTROLLER ***************************************/
     @GetMapping("/loanform")
     public String loanform(ModelMap map) {
 
@@ -126,13 +164,7 @@ public class MainController {
         return "loanslist";
     }
 
-    @PostMapping("/createloan")
-    public String createLoan(@ModelAttribute(name="loan") Loan loan) {
 
-        loanService.save(loan);
-        return "redirect:/loansList";
-
-    }
 
     @GetMapping("/detailsloan/{id}")
     public ModelAndView detailsLoan(@PathVariable(name = "id") int id) {
@@ -164,5 +196,71 @@ public class MainController {
         loanService.delete(id);
         return "redirect:/loanslist";
     }
+
+    //**************************************************+BOOK CONTROLLER************************************/
+
+    @GetMapping("/catalogue")
+    public String getBooks(Model model) {
+        model.addAttribute("listaLibros", bookService.getBooks());
+
+        return "books";
+    }
+
+    // @GetMapping("/formbook")
+    // public String showFormulario(ModelMap map) {
+    //     map.addAttribute("book", new Book());
+    //     map.addAttribute("opinions", opinionService.getOpiniones());
+
+    //     return "bookForm";
+    // }
+
+    // @GetMapping("/detailsbook/{id}")
+    // public ModelAndView details(@PathVariable(name = "id") String id ) {
+
+    //     Book book = bookService.getBook(Integer.parseInt(id));
+    //     ModelAndView mav = new ModelAndView();
+
+    //     mav.setViewName("bookDetail");
+    //     mav.addObject("book", book);
+
+    //     return mav;
+    //  }
+
+    //  @GetMapping("/updatebooks/{id}")
+    //  public ModelAndView update(@PathVariable(name = "id") String id) {
+
+    //     Book book = bookService.getBook(Integer.parseInt(id));
+    //     List<Opinion> opinions = opinionService.getOpiniones();
+    //     ModelAndView mav = new ModelAndView();
+    //     mav.setViewName("uploadBook");
+    //     mav.addObject("book", book);
+    //     mav.addObject("opinion", opinions);
+
+    //     return mav;
+    //  }
+
+    //  @PostMapping("/createbook")
+
+    //  public String createBook(@ModelAttribute(name = "estudiante") Book book, 
+    //  @RequestParam(name = "imagen", required = false) MultipartFile foto) {
+ 
+    //      if (foto != null) {
+    //          String rutaAbsoluta = "C://Users//mrubiolo//OneDrive - Capgemini//Documents//recursos";
+    //          Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + foto.getOriginalFilename());
+            
+    //          try {
+                 
+    //              byte[] bytesFoto = foto.getBytes();
+    //              Files.write(rutaCompleta, bytesFoto);
+    //              book.setPhoto(foto.getOriginalFilename());
+    //              bookService.save(book);
+ 
+    //          } catch (Exception e) {
+    //              e.printStackTrace();
+    //          }
+    //      }
+    //      bookService.save(book);
+    //      return "redirect:/catalogue";
+    //  }
 
 }
