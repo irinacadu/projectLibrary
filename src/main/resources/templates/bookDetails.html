@@ -20,14 +20,7 @@
 
 
   <header class="ScriptHeader">
-    <div class="rt-container">
-      <div class="col-rt-12">
-        <div class="rt-heading">
-          <!-- Meter aqui el libro -->
-          <h1>Book Page</h1>
-        </div>
-      </div>
-    </div>
+    
   </header>
 
   <section>
@@ -51,54 +44,47 @@
                         <tr>
                           <th width="30%">Title</th>
                           <td width="2%">:</td>
-                          <td th:text="*{title}">Example</td>
+                          <td th:text="*{book.title}">Example</td>
                         </tr>
                         <tr>
                           <th width="30%">Author</th>
                           <td width="2%">:</td>
-                          <td th:text="*{author}">Example</td>
+                          <td th:text="*{book.author}">Example</td>
                         </tr>
                         <tr>
                           <th width="30%">Genre</th>
                           <td width="2%">:</td>
-                          <td th:text="*{title}">Example</td>
+                          <td th:text="*{book.title}">Example</td>
                         </tr>
                       </table>
-
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4">
-                  <div class="card shadow-sm">
-                    <div class="card-body col text-center">
-                      <a class="btn btn-success" href="updateUser.html" role="button">Take Book</a>
-                      <a class="btn btn-danger" href="updateUser.html" role="button">Return Book</a>
-                    </div>
-                  </div>
-                  <div style="height: 26px"></div>
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <div class="card shadow-sm">
-                        <div class="card-header bg-transparent border-0">
-                          <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Sinopsis</h3>
-                        </div>
-                        <div class="card-body pt-0">
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                            ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris
-                            nisi ut aliquip ex ea commodo consequat.</p>
-                        </div>
+                      <div class="card-body col text-center">
+                        <div class="button">
+                        <a class="btn btn-success" href="updateUser.html" role="button">Take Book</a>
+                        <a class="btn btn-danger" href="updateUser.html" role="button">Return Book</a>
                       </div>
                     </div>
+                    </div>
+
                   </div>
-
-
-
+                </div>
+              
+              <div class="col-lg-8">
+                <div class="card shadow-sm">
+                  <div class="card-header bg-transparent border-0">
+                    <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Sinopsis</h3>
+                  </div>
+                  <div class="card-body pt-0">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                      ut
+                      labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                      laboris
+                      nisi ut aliquip ex ea commodo consequat.</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
         </div>
         <!-- partial -->
 

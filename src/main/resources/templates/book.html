@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+<body>
+    <h1>Catálogo de libros</h1>
+
+   <table border="1">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Detalles</th>
+            <th>Modificar</th>
+            <th>Borrar</th>
+        </tr>
+    </thead>
+    <tbody th:each=" book : ${listaLibros}">
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.author}"></td>
+        <td><a th:href="@{/details/} + ${book.id}">Ver</a></td>
+        <td><a th:href="@{/update/} + ${book.id}">Ver</a></td>
+        <td><a th:href="@{/deletebook/} + ${book.id}">Ver</a></td>
+
+    </tbody>
+   </table>
+    <a th:href="@{/formulario}">Subir libros</a>
+</body>
+</html>
