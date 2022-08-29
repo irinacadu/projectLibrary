@@ -130,6 +130,46 @@ public class ProjectLibraryApplication implements WebMvcConfigurer {
 					.opinions(opinionSrv.getOpiniones())
 					.build());
 
+			bookSrv.save(Book.builder()
+					.title("A Sangre Fría")
+					.author("Truman Capote")
+					.sinopsis("A sangre fría narra el brutal asesinato de los cuatro miembros de una familia de Kansas. En 1959, un violento crimen sacudió la tranquila vida de Holcomb, Kansas. La sociedad estadounidense de aquellos años quedó conmocionada por un crimen que sugería que cualquiera podía morir asesinado en cualquier momento.")
+					.photo("capote.jpg")
+					.genre(genreSrv.getGenre(6))
+					.user(userSrv.getUser(1))
+					.opinions(opinionSrv.getOpiniones())
+					.build());
+			
+			bookSrv.save(Book.builder()
+					.title("Lolita")
+					.author("Vladimir Nabokov")
+					.sinopsis("Humbert Humert es un profesor que se obsesiona con Dolores Haze (Lolita), la hija de 12 años de su mujer, Charlotte Haze. Cuando ella fallece, él se queda a cargo de la menor con quien termina estableciendo, a sus ojos, una relación de pareja")
+					.photo("lolita.jpg")
+					.genre(genreSrv.getGenre(3))
+					.user(userSrv.getUser(1))
+					.opinions(opinionSrv.getOpiniones())
+					.build());
+
+			bookSrv.save(Book.builder()
+					.title("El Cuento de la Criada")
+					.author("Margaret Atwood")
+					.sinopsis("¿Qué ocurriría si de un momento a otro un sistema democrático se ve derrocado por uno represivo, dictatorial y ultrareligioso? ¿Y si además las mujeres quedaran divididas en roles según su capacidad o no para concebir?")
+					.photo("criada.jpg")
+					.genre(genreSrv.getGenre(3))
+					.user(userSrv.getUser(1))
+					.opinions(opinionSrv.getOpiniones())
+					.build());
+
+					bookSrv.save(Book.builder()
+					.title("Una Habitación Propia")
+					.author("Virginia Woolf")
+					.sinopsis("En 1928 a Virginia Woolf le propusieron dar una serie de charlas sobre el tema de la mujer y la novela. Lejos de cualquier dogmatismo o presunción, planteó la cuestión desde un punto de vista realista, valiente y muy particular. Una pregunta: ¿qué necesitan las mujeres para escribir buenas novelas? Una sola respuesta: independencia económica y personal, es decir, Una habitación propia. Sólo hacía nueve años que se le había concedido el voto a la mujer y aún quedaba mucho camino por recorrer.")
+					.photo("habitacion.jpg")
+					.genre(genreSrv.getGenre(7))
+					.user(userSrv.getUser(1))
+					.opinions(opinionSrv.getOpiniones())
+					.build());
+
 			opinionSrv.save(Opinion.builder().opinion("lkjlkjlkj")
 					.book(bookSrv.getBook(1))
 					.user(userSrv.getUser(1)).build());
