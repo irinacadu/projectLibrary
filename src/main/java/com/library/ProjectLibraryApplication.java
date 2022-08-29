@@ -53,27 +53,37 @@ public class ProjectLibraryApplication {
 			.password("asda123").build());
 
 			bookSrv.save(Book.builder()
-			.title("AASASDASDASDADADAS")
+			.title("La vida")
 			.author("lllllllll")
-			.sinopsis("adlaksdjlaksdlaksdlajdlaksjdlkajsdlkajsldk")
+			.sinopsis("aaaaaaa")
 			.photo("a.jpg")
 			.genre(genreSrv.getGenre(1))
 			.user(userSrv.getUser(1))
-			.opinions(opinionSrv.getOpiniones())
+			.opinions(opinionSrv.getOpinions())
 			.build());
 
+			
+			bookSrv.save(Book.builder()
+			.title("La muerte")
+			.author("lllllllll")
+			.sinopsis("aaaaaaa")
+			.photo("a.jpg")
+			.genre(genreSrv.getGenre(1))
+			.user(userSrv.getUser(2))
+			.opinions(opinionSrv.getOpinions())
+			.build());
 
 			opinionSrv.save(Opinion.builder().opinion("lkjlkjlkj")
 			.book(bookSrv.getBook(1))
 			.user(userSrv.getUser(1)).build());
 
 
-			prestamoSrv.save(Loan.builder()
-			.deliveryDate(LocalDate.parse("2022-05-05"))
-			.dueDate(LocalDate.parse("2022-05-10"))
-			.book(bookSrv.getBook(1))
-			.user(userSrv.getUser(1))
-			.user2(userSrv.getUser(2)).build());
+			// prestamoSrv.save(Loan.builder()
+			// .deliveryDate(LocalDate.parse("2022-05-05"))
+			// .dueDate(LocalDate.parse("2022-05-10"))
+			// .book(bookSrv.getBook(1))
+			// .user(userSrv.getUser(1))
+			// .user2(userSrv.getUser(2)).build());
 		};
 
 

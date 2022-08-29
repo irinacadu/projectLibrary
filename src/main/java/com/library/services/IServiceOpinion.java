@@ -5,7 +5,7 @@ import java.util.List;
 import com.library.entities.Opinion;
 
 public interface IServiceOpinion {
-    public List<Opinion>getOpiniones();
+    public List<Opinion>getOpinions();
     public Opinion getOpinion (int idOpinion);
     public void save (Opinion opinion);
     public void delete (int idOpinion);

@@ -37,8 +37,8 @@ private String author;
 private String sinopsis;
 private String photo;
 
-// @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.MERGE, mappedBy = "book")
-// private List<Opinion> opinions;
+@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.MERGE, mappedBy = "book")
+private List<Opinion> opinions;
 
 @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
 private User user;

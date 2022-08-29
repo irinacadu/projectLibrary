@@ -5,41 +5,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Loans List</title>
 </head>
 
 <body>
-
     <h1>Listado de Prestamos</h1>
+    <table>
+          <tr th:each="loan : ${loanslist}">
+            <td th:text="${loan.id}" name="loan"></td>
+            <td th:text="${loan.deliveryDate}"></td>
+            <td th:text="${loan.dueDate}"</td>
+            <td th:text="${loan.book}"></td>
+            <td th:text="${loan.user}"></td>
+            <td th:text="${loan.user}" ></td>
 
-    <table border="2">
-        <thead>
-            <tr>
-                <th>ID loan</th>
-                <th>delivery date</th>
-                <th>due date</th>
-                <th>bookId</th>
-                <th>Prestador</th>
-                <th>Prestamista</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr th:each="loan : ${loanlist}">
-                <td th:text="${loan.id}"></td>
-                <td th:text="${loan.deliveryDate}"></td>
-                <td th:text="${loan.dueDate}"></td>
-                <td th:text="${loan.book.id}"></td>
-                <td th:text="${loan.user.id}"></td>
-                <td th:text="${loan.user2.id}"></td>
-          
-
-                <td><a th:href="@{/detailsloan/} + ${loan.id}"> Detalles </a></td>
-                <td><a th:href="@{/updateloan/} + ${loan.id}"> Modificar </a></td>
-                <td><a th:href="@{/deleteloan/} + ${loan.id}"> Eliminar </a></td>
             </tr>
 
-        </tbody>
+    </table>
+   
+<a type="submit" value="volver" th:href="@{/userslist}">Volver</a>
 
 </body>
 

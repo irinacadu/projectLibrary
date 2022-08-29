@@ -1,18 +1,26 @@
 package com.library.services;
 
+
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+
 import com.library.dao.ILoanDao;
+
 import com.library.entities.Loan;
+
 
 @Service
 public class LoanServiceImpl implements IServiceLoan {
 
     @Autowired
     private ILoanDao loanDao;
+
+ 
 
     @Override
     public List<Loan> getLoans() {
@@ -28,7 +36,12 @@ public class LoanServiceImpl implements IServiceLoan {
 
     @Override
     public void save(Loan loan) {
-        loanDao.save(loan);    
+
+       
+
+        loanDao.save(loan);
+
+
     }
 
     @Override

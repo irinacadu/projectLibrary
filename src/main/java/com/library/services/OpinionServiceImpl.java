@@ -16,7 +16,7 @@ public class OpinionServiceImpl implements IServiceOpinion {
 
 
     @Override
-    public List<Opinion> getOpiniones() {
+    public List<Opinion> getOpinions() {
      
         return opinionDao.findAll();
     }

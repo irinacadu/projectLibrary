@@ -3,8 +3,9 @@ package com.library.controllers;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 
-
+import org.hibernate.validator.constraints.pl.REGON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.FlashMapManager;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.library.entities.Book;
@@ -26,7 +29,6 @@ import com.library.services.IServiceBook;
 import com.library.services.IServiceLoan;
 import com.library.services.IServiceOpinion;
 import com.library.services.IServiceUser;
-
 
 @Controller
 @RequestMapping("/")
@@ -93,30 +95,83 @@ public class MainController {
 
     }
 
-   @PostMapping("/createloan")
-   public String creatLoan(@ModelAttribute(name = "loan")Loan loan){
+    // PROCEDIMIENTO PARA CREAR UN PRÉSTAMO
 
-    loanService.save(loan);
+@GetMapping("/createloan/{id}/{id}")
+//@PostMapping("/createloan")
+  @RequestMapping(value = "/createloan", method = { RequestMethod.GET, RequestMethod.POST })
+    public ModelAndView createLoan(@ModelAttribute(name = "loan") Loan loan,
+            // @RequestParam(name = "user", required = false) User user,
+            // @RequestParam(name = "book", required = false) Book book,
+            @PathVariable(name = "id") int userId,
+            @PathVariable(name = "id") int bookId
+            ) {
 
-    return "redirect:/loanslist";
+        // int userInt = Integer.parseInt(user);
+        // int bookInt = Integer.parseInt(book);
 
-   }
+        User us = userService.getUser(userId);
+        Book bo = bookService.getBook(bookId);
 
-    @GetMapping("/newloan/{id}")
-    public ModelAndView newLoan(@PathVariable(name ="id") int id, Model model) {
-        model.addAttribute("listaLibros", bookService.getBooks());
+
+        
+        LocalDate today = LocalDate.now();
+        loan.setUser(us);
+        loan.setBook(bo);
+
+        loan.setDeliveryDate(today);
+        loan.setDueDate(null);
+        loan.setUser2(null);
+        loanService.save(loan);
+
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("loanslist");
+        mav.addObject("loan", loan);
+
+        return mav;
+    }
+
+    @GetMapping("/newloanuser/{id}")
+    public ModelAndView newLoanUser(@PathVariable(name = "id") int id,
+            Model model) {
+
+        model.addAttribute("booksList", bookService.getBooks());
+        User user = userService.getUser(id);
+
+        ModelAndView mav = new ModelAndView();
+
+        mav.setViewName("prestamo");
+        mav.addObject("user", user);
+
+        return mav;
+
+    }
+
+    @GetMapping("/newloanbook/{id}")
+    public ModelAndView newLoanBook(@PathVariable(name = "id") int id,
+            Model model) {
+
         User user = userService.getUser(id);
         Book book = bookService.getBook(id);
 
         ModelAndView mav = new ModelAndView();
 
-         mav.setViewName("personalUsuarioProv");
-         mav.addObject("user", user);
-        // mav.addObject("book", book);
+        mav.setViewName("detallesPrestamo");
+        mav.addObject("user", user);
+        mav.addObject("book", book);
 
-         return mav;
-     
+        return mav;
 
+    }
+
+    @GetMapping("/loan")
+    public ModelAndView getLoan(@PathVariable(name = "loan") int id) {
+
+        Loan loan = loanService.getLoan(id);
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("prestamoCreado");
+        mav.addObject("loan", loan);
+        return mav;
     }
 
     @GetMapping("/detailsuser/{id}")
@@ -130,9 +185,8 @@ public class MainController {
         return mav;
     }
 
-    
     @GetMapping("/update/{id}")
-    public ModelAndView updateUser(@PathVariable(name = "id") int id) {
+    public ModelAndView updateUser(@PathVariable(name = "user") int id) {
         User user = userService.getUser(id);
         ModelAndView mav = new ModelAndView();
 
@@ -144,13 +198,15 @@ public class MainController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteUSer(@PathVariable(name = "id") int id) {
+    public String deleteUSer(@PathVariable(name = "user") int id) {
         userService.delete(id);
         return "redirect:/userslist";
 
     }
 
-    /*******************************************************LOAN CONTROLLER ***************************************/
+    /*******************************************************
+     * LOAN CONTROLLER
+     ***************************************/
     @GetMapping("/loanform")
     public String loanform(ModelMap map) {
 
@@ -160,11 +216,10 @@ public class MainController {
 
     @GetMapping("/loanslist")
     public String getLoans(Model model) {
-        model.addAttribute("loanlist", loanService.getLoans());
+
+        model.addAttribute("loanslist", loanService.getLoans());
         return "loanslist";
     }
-
-
 
     @GetMapping("/detailsloan/{id}")
     public ModelAndView detailsLoan(@PathVariable(name = "id") int id) {
@@ -173,7 +228,7 @@ public class MainController {
 
         mav.setViewName("loandetails");
         mav.addObject("loan", loan);
-        
+
         return mav;
     }
 
@@ -197,7 +252,8 @@ public class MainController {
         return "redirect:/loanslist";
     }
 
-    //**************************************************+BOOK CONTROLLER************************************/
+    // **************************************************+BOOK
+    // CONTROLLER************************************/
 
     @GetMapping("/catalogue")
     public String getBooks(Model model) {
@@ -208,59 +264,61 @@ public class MainController {
 
     // @GetMapping("/formbook")
     // public String showFormulario(ModelMap map) {
-    //     map.addAttribute("book", new Book());
-    //     map.addAttribute("opinions", opinionService.getOpiniones());
+    // map.addAttribute("book", new Book());
+    // map.addAttribute("opinions", opinionService.getOpiniones());
 
-    //     return "bookForm";
+    // return "bookForm";
     // }
 
-    // @GetMapping("/detailsbook/{id}")
-    // public ModelAndView details(@PathVariable(name = "id") String id ) {
+    @GetMapping("/detailsbook/{id}")
+    public ModelAndView details(@PathVariable(name = "id") int id) {
 
-    //     Book book = bookService.getBook(Integer.parseInt(id));
-    //     ModelAndView mav = new ModelAndView();
+        Book book = bookService.getBook(id);
+        ModelAndView mav = new ModelAndView();
 
-    //     mav.setViewName("bookDetail");
-    //     mav.addObject("book", book);
+        mav.setViewName("bookDetail");
+        mav.addObject("book", book);
 
-    //     return mav;
-    //  }
+        return mav;
+    }
 
-    //  @GetMapping("/updatebooks/{id}")
-    //  public ModelAndView update(@PathVariable(name = "id") String id) {
+    // @GetMapping("/updatebooks/{id}")
+    // public ModelAndView update(@PathVariable(name = "id") String id) {
 
-    //     Book book = bookService.getBook(Integer.parseInt(id));
-    //     List<Opinion> opinions = opinionService.getOpiniones();
-    //     ModelAndView mav = new ModelAndView();
-    //     mav.setViewName("uploadBook");
-    //     mav.addObject("book", book);
-    //     mav.addObject("opinion", opinions);
+    // Book book = bookService.getBook(Integer.parseInt(id));
+    // List<Opinion> opinions = opinionService.getOpiniones();
+    // ModelAndView mav = new ModelAndView();
+    // mav.setViewName("uploadBook");
+    // mav.addObject("book", book);
+    // mav.addObject("opinion", opinions);
 
-    //     return mav;
-    //  }
+    // return mav;
+    // }
 
-    //  @PostMapping("/createbook")
+    // @PostMapping("/createbook")
 
-    //  public String createBook(@ModelAttribute(name = "estudiante") Book book, 
-    //  @RequestParam(name = "imagen", required = false) MultipartFile foto) {
- 
-    //      if (foto != null) {
-    //          String rutaAbsoluta = "C://Users//mrubiolo//OneDrive - Capgemini//Documents//recursos";
-    //          Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + foto.getOriginalFilename());
-            
-    //          try {
-                 
-    //              byte[] bytesFoto = foto.getBytes();
-    //              Files.write(rutaCompleta, bytesFoto);
-    //              book.setPhoto(foto.getOriginalFilename());
-    //              bookService.save(book);
- 
-    //          } catch (Exception e) {
-    //              e.printStackTrace();
-    //          }
-    //      }
-    //      bookService.save(book);
-    //      return "redirect:/catalogue";
-    //  }
+    // public String createBook(@ModelAttribute(name = "estudiante") Book book,
+    // @RequestParam(name = "imagen", required = false) MultipartFile foto) {
+
+    // if (foto != null) {
+    // String rutaAbsoluta = "C://Users//mrubiolo//OneDrive -
+    // Capgemini//Documents//recursos";
+    // Path rutaCompleta = Paths.get(rutaAbsoluta + "//" +
+    // foto.getOriginalFilename());
+
+    // try {
+
+    // byte[] bytesFoto = foto.getBytes();
+    // Files.write(rutaCompleta, bytesFoto);
+    // book.setPhoto(foto.getOriginalFilename());
+    // bookService.save(book);
+
+    // } catch (Exception e) {
+    // e.printStackTrace();
+    // }
+    // }
+    // bookService.save(book);
+    // return "redirect:/catalogue";
+    // }
 
 }

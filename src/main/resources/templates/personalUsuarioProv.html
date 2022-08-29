@@ -1,41 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Provisional user</title>
 </head>
+
 <body>
-<h1>SELECT</h1>
+    <h1>SELECT</h1>
 
     <form method="post" th:object="${user}" th:action="@{/createloan}">
-        <!-- <div th:object="${book}"> -->
-        
-            Id Usuario <p th:text = "${user.id}" name ="id" readonly></p>
-            Nombre Usuario <p th:text = "${user.name}" name ="id" readonly></p>
-            
+        <div  th:object="${book}">
 
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Título</th>
-                    <th>Autor</th>
-                    <th>Detalles</th>
-                    <th>Modificar</th>
-                    <th>Borrar</th>
-                </tr>
-            </thead>
-            <!-- <tbody th:each=" book : ${listaLibros}">
-                <td th:text="${book.title}"></td>
-                <td th:text="${book.author}"></td>
-                <td><a th:href="@{/newloan/} + ${book.id}">Seleccionar</a></td>
-            
+            Id Usuario <input th:text="${user.id}" value="user" readonly></p>
+            Nombre Usuario <p th:text="${user.name}" readonly></p>
+
+     
+      
+            Id book <input th:text="${book.id}" value="user" readonly></p>
+            Nombre Libro <p th:text="${book.title}" readonly></p>
+
+            <a th:href="@{/createloan} + ${user.id} +  " type="submit" id="botonPrueba" ></a>
+        </div>
+
+            <!-- <table border="1">
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Autor</th>
+                        <th>Detalles</th>
+                        <th>Modificar</th>
+                        <th>Borrar</th>
+                    </tr>
+                </thead>
+               
+    
+
+    <!-- <form method="post" th:object="${book}" th:action="@{/createloan}"> -->
+
+        <!-- <tbody th:each=" book : ${listaLibros}">
         
-            </tbody>
-           </table>
-        </div> -->
-        <input type="submit" value="Enviar" name="enviar" required>
-    </form>
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author}"></td>
+            <td><input type="checkbox"  th:text="${book.id}"  id="seleccionado" th:checked="${book.id} " th:value="${book.id}" th:href="@{/createloan}"></td>
+        </tbody>
+</table> -->
+
+
+
+</form>
+
 </body>
+
 </html>

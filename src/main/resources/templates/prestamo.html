@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<h1>prestamo</h1>
+<!-- <form method="post" th:object="${book}" th:action="@{/createloan}">
+    <div  th:object="${user}"> -->
+
+        Id Usuario <input th:text="${user.id}" th:value="${user.id}" name="user" readonly>
+        Nombre Usuario <p th:text="${user.name}" readonly>
+<h1>libros</h1>
+<table>
+
+    <tbody th:each=" book : ${booksList}">
+        <input th:text="${book.id}" name="book" th:value="${book.id}" readonly>
+        <td th:text="${book.id}"></td>
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.author}"></td>
+        <td><input type="checkbox" th:text="${book.id}" id="seleccionado" ></td>
+       <td><a th:href="@{/newloanbook/} + ${book.id}" type="submit" id="botonPrueba" value="aceptar" >Aceptar</a></td>
+    </tbody>
+    <!-- <button><a th:href="@{/newloanbook} + ${book.id}" type="submit" id="botonPrueba" value="aceptar" >Aceptar</a></button> -->
+</table>
+<!-- <table>
+    <tbody th:each=" user : ${usersList}">
+        <input th:text="${user.id}" name="user" readonly>
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td><input type="checkbox" th:value="${user.id}" th:name="user" >
+        </td>
+    </tbody>
+</table> -->
+
+<!-- <input type="submit" value="enviar"> -->
+
+
+
+<!-- </div>
+</form> -->
+-->
+    
+</body>
+</html>
