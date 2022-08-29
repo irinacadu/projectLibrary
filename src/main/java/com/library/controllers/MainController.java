@@ -99,41 +99,27 @@ public class MainController {
     // PROCEDIMIENTO PARA CREAR UN PRÉSTAMO
 
     // @GetMapping("/createloan/{id}/{id}")
-    @PostMapping("/createloan")
-    // @RequestMapping(value = "/createloan", method = { RequestMethod.GET,
-    // RequestMethod.POST })
-    public String createLoan(@ModelAttribute(name = "loan") Loan loan,
-            Model model
-    // @RequestParam(name = "user", required = false) String user,
-    // @RequestParam(name = "book", required = false) String book
-    // @PathVariable(name = "id") int userId,
-    // @PathVariable(name = "id") int bookId
-    ) {
+    // @PostMapping("/createloan")
+    // // @RequestMapping(value = "/createloan", method = { RequestMethod.GET,
+    // // RequestMethod.POST })
+    // public String createLoan(@ModelAttribute(name = "loan") Loan loan,
+    //         Model model
+    
+    // ) {
 
-        // int userInt = Integer.parseInt(user);
-        // int bookInt = Integer.parseInt(book);
 
-        // User us = userService.getUser(userInt);
-        // Book bo = bookService.getBook(bookInt);
 
-        // // int a = userId;
-        // // int b = bookId;
+    //     // loan.setDeliveryDate(today);
+    //     loan.setDueDate(null);
+    //     // loan.setUser2(null);
+    //     loanService.save(loan);
 
-        // LocalDate today = LocalDate.now();
-        // loan.setUser(us);
-        // loan.setBook(bo);
+    //     ModelAndView mav = new ModelAndView();
+    //     mav.setViewName("loanslist");
+    //     mav.addObject("loan", loan);
 
-        // loan.setDeliveryDate(today);
-        loan.setDueDate(null);
-        // loan.setUser2(null);
-        loanService.save(loan);
-
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("loanslist");
-        mav.addObject("loan", loan);
-
-        return "redirect:/loanslist";
-    }
+    //     return "redirect:/loanslist";
+    // }
 
  
     @GetMapping("/newloanuser/{id}")
