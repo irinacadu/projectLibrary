@@ -45,7 +45,7 @@ public class Loan {
     @ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.MERGE )
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.MERGE )
-     private User user2;
+    // @ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.MERGE )
+    //  private User user2;
 
 }

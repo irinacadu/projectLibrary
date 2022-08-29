@@ -8,20 +8,24 @@
 </head>
 <body>
 <h1>prestamo</h1>
-<!-- <form method="post" th:object="${book}" th:action="@{/createloan}">
-    <div  th:object="${user}"> -->
+<!-- <form method="post" th:object="${book}" th:action="@{/createloan}"></form> -->
+    <!-- <div  th:object="${user}"> -->
 
-        Id Usuario <input th:text="${user.id}" th:value="${user.id}" name="user" readonly>
+        Id Usuario <input  th:text="${user.id}" th:value="${user.id}" 
+        name="user" readonly>
+
         Nombre Usuario <p th:text="${user.name}" readonly>
 <h1>libros</h1>
+
+
 <table>
 
     <tbody th:each=" book : ${booksList}">
-        <input th:text="${book.id}" name="book" th:value="${book.id}" readonly>
+        <input th:text="${book.id}" th:field="*{id}" th:value="${book.id}" readonly>
         <td th:text="${book.id}"></td>
         <td th:text="${book.title}"></td>
         <td th:text="${book.author}"></td>
-        <td><input type="checkbox" th:text="${book.id}" id="seleccionado" ></td>
+        <td><input type="checkbox" th:text="${book.id}"  id="seleccionado" name="book"></td>
        <td><a th:href="@{/newloanbook/} + ${book.id}" type="submit" id="botonPrueba" value="aceptar" >Aceptar</a></td>
     </tbody>
     <!-- <button><a th:href="@{/newloanbook} + ${book.id}" type="submit" id="botonPrueba" value="aceptar" >Aceptar</a></button> -->
@@ -36,13 +40,13 @@
     </tbody>
 </table> -->
 
-<!-- <input type="submit" value="enviar"> -->
+<input type="submit" value="enviar">
 
 
 
-<!-- </div>
-</form> -->
--->
+</div>
+</form> 
+
     
 </body>
 </html>

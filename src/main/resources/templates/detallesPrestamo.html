@@ -11,16 +11,17 @@
 <body>
 <h1>Detalles</h1>
     <form method="post" th:object="${book}" th:action="@{/createloan}">
-        <div th:object="${user}">
-           <p> Id Usuario <input th:field="${user.id}" name="user" th:value="${user.id}" readonly><br>
-            Nombre Usuario <p th:text="${user.name}" readonly></p>
+  
+           <!-- <p> Id Usuario <input th:field="*{id}" name="user" th:value="${user.id}" readonly><br>
+            Nombre Usuario <p th:text="${user.name}" readonly></p> -->
 
-           <p> Id Libro <input th:field="${book.id}" name="book" th:value="${book.id}" readonly><br>
+           <p> Id Libro <input  th:field="*{id}" name="book" th:value="${book.id}" readonly><br>
             Nombre Titulo<p th:text="${book.title}" readonly></p>
 
                
                    
         </div>
+        <!-- <div><a th:href="@{/createloan/}+${user.id}+${user.name}">Aceptar</a></div> -->
         <div> <input type="submit" value="Enviar" name="enviar" required></div>
        
 

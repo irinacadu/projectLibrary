@@ -59,7 +59,7 @@ public class ProjectLibraryApplication {
 			.photo("a.jpg")
 			.genre(genreSrv.getGenre(1))
 			.user(userSrv.getUser(1))
-			.opinions(opinionSrv.getOpinions())
+		//	.opinions(opinionSrv.getOpinions())
 			.build());
 
 			
@@ -70,7 +70,7 @@ public class ProjectLibraryApplication {
 			.photo("a.jpg")
 			.genre(genreSrv.getGenre(1))
 			.user(userSrv.getUser(2))
-			.opinions(opinionSrv.getOpinions())
+			//.opinions(opinionSrv.getOpinions())
 			.build());
 
 			opinionSrv.save(Opinion.builder().opinion("lkjlkjlkj")

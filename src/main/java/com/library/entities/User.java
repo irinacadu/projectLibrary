@@ -72,8 +72,8 @@ public class User {
 
 
     // ESTA RELACION DA ERROR
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user")
-    private List<Opinion> opinion;
+    // @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user")
+    // private List<Opinion> opinion;
 
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user")
@@ -83,7 +83,7 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user")
     private List<Loan> prestamoPrestador;
     
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user2")
-    private List<Loan> prestamoPrestado;
+    // @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user2")
+    // private List<Loan> prestamoPrestado;
     
 }

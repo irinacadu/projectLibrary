@@ -4,6 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.List;
 
 import org.hibernate.validator.constraints.pl.REGON;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,44 +98,50 @@ public class MainController {
 
     // PROCEDIMIENTO PARA CREAR UN PRÉSTAMO
 
-@GetMapping("/createloan/{id}/{id}")
-//@PostMapping("/createloan")
-  @RequestMapping(value = "/createloan", method = { RequestMethod.GET, RequestMethod.POST })
-    public ModelAndView createLoan(@ModelAttribute(name = "loan") Loan loan,
-            // @RequestParam(name = "user", required = false) User user,
-            // @RequestParam(name = "book", required = false) Book book,
-            @PathVariable(name = "id") int userId,
-            @PathVariable(name = "id") int bookId
-            ) {
+    // @GetMapping("/createloan/{id}/{id}")
+    @PostMapping("/createloan")
+    // @RequestMapping(value = "/createloan", method = { RequestMethod.GET,
+    // RequestMethod.POST })
+    public String createLoan(@ModelAttribute(name = "loan") Loan loan,
+            Model model
+    // @RequestParam(name = "user", required = false) String user,
+    // @RequestParam(name = "book", required = false) String book
+    // @PathVariable(name = "id") int userId,
+    // @PathVariable(name = "id") int bookId
+    ) {
 
         // int userInt = Integer.parseInt(user);
         // int bookInt = Integer.parseInt(book);
 
-        User us = userService.getUser(userId);
-        Book bo = bookService.getBook(bookId);
+        // User us = userService.getUser(userInt);
+        // Book bo = bookService.getBook(bookInt);
 
+        // // int a = userId;
+        // // int b = bookId;
 
-        
-        LocalDate today = LocalDate.now();
-        loan.setUser(us);
-        loan.setBook(bo);
+        // LocalDate today = LocalDate.now();
+        // loan.setUser(us);
+        // loan.setBook(bo);
 
-        loan.setDeliveryDate(today);
+        // loan.setDeliveryDate(today);
         loan.setDueDate(null);
-        loan.setUser2(null);
+        // loan.setUser2(null);
         loanService.save(loan);
 
         ModelAndView mav = new ModelAndView();
         mav.setViewName("loanslist");
         mav.addObject("loan", loan);
 
-        return mav;
+        return "redirect:/loanslist";
     }
 
+ 
     @GetMapping("/newloanuser/{id}")
     public ModelAndView newLoanUser(@PathVariable(name = "id") int id,
-            Model model) {
+            Model model, Loan loan) {
 
+        loan.setUser(userService.getUser(id));
+        loanService.save(loan);
         model.addAttribute("booksList", bookService.getBooks());
         User user = userService.getUser(id);
 
@@ -147,20 +154,27 @@ public class MainController {
 
     }
 
+
+
     @GetMapping("/newloanbook/{id}")
-    public ModelAndView newLoanBook(@PathVariable(name = "id") int id,
-            Model model) {
+    public String newLoanBook(
+            @PathVariable(name = "id") int id
 
-        User user = userService.getUser(id);
-        Book book = bookService.getBook(id);
+    ) {
 
-        ModelAndView mav = new ModelAndView();
+        LocalDate today = LocalDate.now();
 
-        mav.setViewName("detallesPrestamo");
-        mav.addObject("user", user);
-        mav.addObject("book", book);
+        List<Loan> loans = loanService.getLoans();
+        Loan l = loans.get(loans.size() - 1);
 
-        return mav;
+        l.setBook(bookService.getBook(id));
+
+        l.setDeliveryDate(today);
+        l.setDueDate(null);
+        loanService.save(l);
+      
+
+        return "redirect:/loanslist";
 
     }
 
