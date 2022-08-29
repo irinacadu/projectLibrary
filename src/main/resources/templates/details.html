@@ -7,26 +7,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Meter aqui el libro -->
   <title>Details of ___</title>
+  
+
 
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css'>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
-  <link rel="stylesheet" href="css/demo.css" />
-  <link rel="stylesheet" href="css/bookDetails.css">
+  <!-- <link rel="stylesheet" href="css/demo.css" />
+  <link rel="stylesheet" href="bookDetails.css"> -->
+
+  <style>
+    .body {
+      background-color: red;
+    }
+  </style>
+
+
 </head>
 
 <body>
+  <div class="col">
+    <div class="row">
 
-
+      <!-- Navigation Bar -->
+      <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark" style="background-color: black;">
+        <div class="container">
+            <a href="#" class="navbar-brand mb-0 h1">
+                <img class="d-inline-block align-top" src="/images/logo.jpg" alt="logo" height="30px" width="30px">
+                Home
+            </a>
+            <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" class="navbar-toggler"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a href="#" class="nav-link">
+                            Your account
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+  </div>
+</div>
   <header class="ScriptHeader">
     
   </header>
 
+
   <section>
-    <div class="rt-container">
+    <div class="rt-container mb-sm-1" >
       <div class="col-rt-12">
         <div class="Scriptcontent">
+
+
 
           <!-- Book Profile -->
           <div class="book-profile py-4">
@@ -35,17 +74,12 @@
                 <div class="col-lg-4">
                   <div class="card shadow-sm">
                     <div class="card-header bg-transparent text-center">
-                      <img class="profile_img" src="https://source.unsplash.com/600x300/?student" alt="book dp">
-                      <h3>Book Title</h3>
+                      <img class="profile_img" th:src = "@{'/images/' + ${book.photo}}" height="250px" width="auto"  alt="book dp">
+                      <h3 th:text="*{book.title}"></h3>
                     </div>
 
-                    <div class="card-body col text-center">
+                    <div  class="card-body col text-center">
                       <table class="table table-bordered">
-                        <tr>
-                          <th width="30%">Title</th>
-                          <td width="2%">:</td>
-                          <td th:text="*{book.title}">Example</td>
-                        </tr>
                         <tr>
                           <th width="30%">Author</th>
                           <td width="2%">:</td>
@@ -54,7 +88,7 @@
                         <tr>
                           <th width="30%">Genre</th>
                           <td width="2%">:</td>
-                          <td th:text="*{book.title}">Example</td>
+                          <td th:text="*{book.genre.genre}">Example</td>
                         </tr>
                       </table>
                       <div class="card-body col text-center">
@@ -74,11 +108,7 @@
                     <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Sinopsis</h3>
                   </div>
                   <div class="card-body pt-0">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                      ut
-                      labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                      laboris
-                      nisi ut aliquip ex ea commodo consequat.</p>
+                    <p th:text="*{book.sinopsis}"></p>
                   </div>
                 </div>
               </div>

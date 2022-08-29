@@ -39,7 +39,7 @@ public class BookController {
 
         model.addAttribute("listaLibros", bookService.getBooks());
 
-        return "books";
+        return "catalogueBs";
     }
 
     @GetMapping("/formulario")
@@ -56,7 +56,7 @@ public class BookController {
         Book book = bookService.getBook(Integer.parseInt(id));
         ModelAndView mav = new ModelAndView();
 
-        mav.setViewName("bookDetail");
+        mav.setViewName("details");
         mav.addObject("book", book);
 
         return mav;

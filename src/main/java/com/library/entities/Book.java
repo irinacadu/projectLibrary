@@ -44,7 +44,7 @@ private List<Opinion> opinions;
 @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
 private User user;
 
-@ManyToOne
+@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 private Genre genre;
 
 
