@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.library.entities.Book;
 import com.library.entities.Opinion;
+import com.library.entities.User;
 import com.library.services.IServiceBook;
 import com.library.services.IServiceOpinion;
 
@@ -38,6 +39,15 @@ public class BookController {
     public String login(ModelMap model) {
 
         return "login";
+    }
+
+    @GetMapping("/userform")
+    public String userForm(ModelMap map) {
+        map.addAttribute("user", new User()); // se llama al objeto y lo crea vacío para poder rellenarlo
+        // con los datos que le damos al darle de alta
+
+        return "userForm";
+
     }
 
     @GetMapping("/catalogue")
