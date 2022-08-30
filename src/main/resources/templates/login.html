@@ -55,19 +55,19 @@
                 </div>
                 <div class="px-lg-5 py-lg-4 p-4 w-100 align-self-center">
                     <h1 class="font-weight-bold nb-4">Sign In</h1>
-                    <form th:object="${user}">
+                    <form>
                       <div class="mb-4">
-                        <label for="exampleInputEmail1" class="form-label" th:field="*{email}">Email</label>
+                        <label for="exampleInputEmail1" class="form-label">Email</label>
                         <input type="email" class="form-control bg-dark-x border-0" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email">
                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                       </div>
                       <div class="mb-4">
-                        <label for="exampleInputPassword1" class="form-label" th:field="*{password}">Password</label>
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
                         <input type="password" class="form-control bg-dark-x border-0 mb-2" id="exampleInputPassword1" placeholder="Enter your password">
                         <a href:"#" id="emailHelp" class="form-text text-muted text-decoration-none">Forgot your password?</a>
                       </div>
               
-                      <button type="submit" class="btn btn-primary w-100">Sign In</button>
+                      <button type="submit" class="btn btn-primary w-100" th:href="@{/userform}">Sign In</button>
                     </form>
                     <div class="text-center px-lg-5 pt-lg-3 pb-lg-4 p-4 w-100 mt-auto">
                       <p class="d-inline-block mb-0">You don't have an acount yet?</p> 

@@ -34,6 +34,12 @@ public class BookController {
     @Autowired
     IServiceOpinion opinionService;
 
+    @GetMapping("/login")
+    public String login(ModelMap model) {
+
+        return "login";
+    }
+
     @GetMapping("/catalogue")
     public String getBooks(Model model) {
 
