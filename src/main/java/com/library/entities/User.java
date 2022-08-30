@@ -53,7 +53,7 @@ public class User {
    // @Size(min=9, max=13, message="La longitud del telefono no es correcta.")
     private String phone;
 
-    private String photo;
+    // private String photo;
 
   
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -76,8 +76,8 @@ public class User {
     // private List<Opinion> opinion;
 
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user")
-    private List<Book> book;
+    // @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user")
+    // private List<Book> book;
 
     // ESTA DA ERROR
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user")

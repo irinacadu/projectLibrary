@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+
+<head th:fragment="cabecera">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/css/navbar.css">
+
+    <title>Catalogue</title>
+
+
+    <style>
+        .carousel-item {
+            margin: 0 auto;
+        }
+
+        .carousel-item,
+        .carousel-inner,
+        .carousel-inner img {
+            height: 200px;
+            width: auto;
+            margin: 0 auto;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="col">
+        <div class="row">
+            <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark" style="background-color: black;">
+                <div class="container">
+                    <a href="#" class="navbar-brand mb-0 h1">
+                        <img class="d-inline-block align-top" src="/images/logo.jpg" alt="logo" height="30px"
+                            width="AUTO">
+                        
+                    </a>
+                    <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" class="navbar-toggler"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a href="#" class="nav-link">
+                                    Your account
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-2"></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
+                            class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="/images/1984.jpg" class="img-responsive center-block" alt="...">
+                        </div>
+
+
+                        <div class="carousel-item">
+                            <img src="/images/451.jpg" class="d-block w-100 img-fluid" alt="...">
+                        </div>
+
+                        <div class="carousel-item">
+                            <img src="/images/grandes.jpg" class="d-block w-100 img-fluid" alt="...">
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <div class="col-md-6"></div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <br>
+    <br>
+
+    <!-- Table -->
+    <div class="container">
+        <input class="form-control" id="myInput" type="text" placeholder="Buscar...">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Género</th>
+
+                    <!-- <th>Detalles</th>
+                    <th>Modificar</th>
+                    <th>Borrar</th> -->
+                </tr>
+            </thead>
+            <tbody id="myTable" th:each=" book : ${booksList}">
+                <td>
+                    <a th:text="${book.title}" th:href="@{/detailsbook/} + ${book.id}"> </a>
+                </td>
+                <td th:text="${book.author}"></td>
+                <td th:text="${book.genre.genre}"></td>
+                <!-- <td><a th:href="@{/detailsbook/} + ${book.id}">Ver</a></td> -->
+                <!-- <td><a th:href="@{/newloanbook/} + ${book.id}" type="submit" id="botonPrueba" value="aceptar" >Aceptar</a></td> -->
+
+                
+            <!-- <td><a th:href="@{/update/} + ${book.id}">Ver</a></td>
+                <td><a th:href="@{/deletebook/} + ${book.id}">Ver</a></td>  -->
+
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
+    
+
+
+    <!-- NO BORRAR -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

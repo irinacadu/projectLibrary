@@ -72,25 +72,27 @@ public class MainController {
     }
 
     @PostMapping("/createuser")
-    public String crearUser(@ModelAttribute(name = "user") User user,
-            @RequestParam(name = "image", required = false) MultipartFile photo) {
-        if (photo != null) {
-            String rutaAbsoluta = "C://Users//icasasdu//Documents//recursos";
-            Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + photo.getOriginalFilename());
+    public String crearUser(@ModelAttribute(name = "id") User user
+    
+            // @RequestParam(name = "image", required = false) MultipartFile photo
+            ) {
+        // if (photo != null) {
+            // String rutaAbsoluta = "C://Users//icasasdu//Documents//recursos";
+            // Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + photo.getOriginalFilename());
 
-            try {
+            // try {
 
-                byte[] bytesFoto = photo.getBytes();
-                Files.write(rutaCompleta, bytesFoto);
-                user.setPhoto(photo.getOriginalFilename());
+            //     byte[] bytesFoto = photo.getBytes();
+                // Files.write(rutaCompleta, bytesFoto);
+                // user.setPhoto(photo.getOriginalFilename());
                 userService.save(user);
 
-            } catch (Exception e) {
+        //     } catch (Exception e) {
 
-                e.printStackTrace();
+        //         e.printStackTrace();
 
-            }
-        }
+        //     }
+        // }
 
         return "redirect:/userslist";
 
@@ -126,14 +128,14 @@ public class MainController {
     public ModelAndView newLoanUser(@PathVariable(name = "id") int id,
             Model model, Loan loan) {
 
-        loan.setUser(userService.getUser(id));
+       loan.setUser(userService.getUser(id));
         loanService.save(loan);
         model.addAttribute("booksList", bookService.getBooks());
         User user = userService.getUser(id);
 
         ModelAndView mav = new ModelAndView();
 
-        mav.setViewName("prestamo");
+        mav.setViewName("bookdetails");
         mav.addObject("user", user);
 
         return mav;
@@ -149,30 +151,35 @@ public class MainController {
     ) {
 
         LocalDate today = LocalDate.now();
-
         List<Loan> loans = loanService.getLoans();
-        Loan l = loans.get(loans.size() - 1);
+        int longLoans= loans.size();
+
+        // if(longLoans == 0){
+        // longLoans=1;
+        // }else{
+        Loan l = loans.get(longLoans - 1);
 
         l.setBook(bookService.getBook(id));
 
         l.setDeliveryDate(today);
         l.setDueDate(null);
         loanService.save(l);
-      
+        // }
 
         return "redirect:/loanslist";
 
     }
+//NO TENGO CLARO SI NECESITAMOS ESTO
 
-    @GetMapping("/loan")
-    public ModelAndView getLoan(@PathVariable(name = "loan") int id) {
+    // @GetMapping("/loan")
+    // public ModelAndView getLoan(@PathVariable(name = "loan") int id) {
 
-        Loan loan = loanService.getLoan(id);
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("prestamoCreado");
-        mav.addObject("loan", loan);
-        return mav;
-    }
+    //     Loan loan = loanService.getLoan(id);
+    //     ModelAndView mav = new ModelAndView();
+    //     mav.setViewName("prestamoCreado");
+    //     mav.addObject("loan", loan);
+    //     return mav;
+    // }
 
     @GetMapping("/detailsuser/{id}")
     public ModelAndView detailsUser(@PathVariable(name = "id") int id) {
@@ -259,7 +266,7 @@ public class MainController {
     public String getBooks(Model model) {
         model.addAttribute("listaLibros", bookService.getBooks());
 
-        return "books";
+        return "catalogueBs";
     }
 
     // @GetMapping("/formbook")
@@ -276,7 +283,7 @@ public class MainController {
         Book book = bookService.getBook(id);
         ModelAndView mav = new ModelAndView();
 
-        mav.setViewName("bookDetail");
+        mav.setViewName("bookdetails");
         mav.addObject("book", book);
 
         return mav;

@@ -11,7 +11,7 @@ import javax.persistence.Id;
 
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,14 +34,15 @@ private int id;
 //private String availability;
 private String title;
 private String author;
+@Size (min = 2, max = 4000)
 private String sinopsis;
-private String photo;
+// private String photo;
 
 // @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.MERGE, mappedBy = "book")
 // private List<Opinion> opinions;
 
-@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
-private User user;
+// @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
+// private User user;
 
 @ManyToOne
 private Genre genre;
