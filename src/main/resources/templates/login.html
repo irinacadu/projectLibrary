@@ -1,18 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head th:replace="baseTemplate :: cabecera">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+  <head th:fragment="cabecera">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;600&display=swap" rel="stylesheet">
+
+    <title>Log In</title>
     <style>
-        .carousel-item{
-          height: 500px;
-          width: 500px;
-        }
-      </style>
-</head>
-<body class="bg-dark">
+      .carousel-item{
+        height: 500px;
+        width: 500px;
+      }
+    </style>
+  </head>
+  <body class="bg-dark">
     <section>
         <div class="row g-0"> 
           <!-- el g-0 es para quitar el scroll horizontal -->
@@ -49,14 +55,14 @@
                 </div>
                 <div class="px-lg-5 py-lg-4 p-4 w-100 align-self-center">
                     <h1 class="font-weight-bold nb-4">Sign In</h1>
-                    <form>
+                    <form th:object="${user}">
                       <div class="mb-4">
-                        <label for="exampleInputEmail1" class="form-label">Email</label>
+                        <label for="exampleInputEmail1" class="form-label" th:field="*{email}">Email</label>
                         <input type="email" class="form-control bg-dark-x border-0" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email">
                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                       </div>
                       <div class="mb-4">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <label for="exampleInputPassword1" class="form-label" th:field="*{password}">Password</label>
                         <input type="password" class="form-control bg-dark-x border-0 mb-2" id="exampleInputPassword1" placeholder="Enter your password">
                         <a href:"#" id="emailHelp" class="form-text text-muted text-decoration-none">Forgot your password?</a>
                       </div>
@@ -65,7 +71,7 @@
                     </form>
                     <div class="text-center px-lg-5 pt-lg-3 pb-lg-4 p-4 w-100 mt-auto">
                       <p class="d-inline-block mb-0">You don't have an acount yet?</p> 
-                      <a href="#" class="text-light font-weight-bold">Create one.</a>
+                      <a href="#" class="text-light font-weight-bold" >Create one.</a>
                     </div>
                 </div>
                 
@@ -75,6 +81,8 @@
             
         </div>
     </section>
-    <script th:fragment="baseTemplate :: javascriptsupport"></script>
-</body>
+
+    <script th:fragment="javascriptsupport" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+  </body>
 </html>
