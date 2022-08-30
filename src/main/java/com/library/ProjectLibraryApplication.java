@@ -2,25 +2,31 @@ package com.library;
 
 import java.time.LocalDate;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.library.entities.Book;
 import com.library.entities.Genre;
 import com.library.entities.Opinion;
 import com.library.entities.Prestamo;
+import com.library.entities.Rol;
 import com.library.entities.User;
 import com.library.services.IServiceBook;
 import com.library.services.IServiceGenre;
 import com.library.services.IServiceOpinion;
 import com.library.services.IServicePrestamo;
+import com.library.services.IServiceRol;
 import com.library.services.IServiceUser;
 
 @SpringBootApplication
-public class ProjectLibraryApplication implements WebMvcConfigurer {
+public class ProjectLibraryApplication implements CommandLineRunner {
+
+	@Autowired
+    private BCryptPasswordEncoder passEncoder;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjectLibraryApplication.class, args);
@@ -28,7 +34,7 @@ public class ProjectLibraryApplication implements WebMvcConfigurer {
 
 	@Bean
 	public CommandLineRunner demoData(IServiceUser userSrv, IServiceBook bookSrv,
-			IServiceOpinion opinionSrv, IServicePrestamo prestamoSrv, IServiceGenre genreSrv) {
+			IServiceOpinion opinionSrv, IServiceRol rolSrv, IServicePrestamo prestamoSrv, IServiceGenre genreSrv) {
 		return args -> {
 
 			// facultadSrv.save(Facultad.builder().nombre("INFORMATICA").build());
@@ -42,12 +48,16 @@ public class ProjectLibraryApplication implements WebMvcConfigurer {
 
 			userSrv.save(User.builder()
 					.name("aaaa")
-					.surname("BBBbbbbbbbbbb")
+					.surname("aaaaa")
 					.email("aaaa@bbbb.com")
 					.phone("28323123")
 					.birthDate(LocalDate.parse("1989-03-12"))
-					.userName("asaassdasd")
-					.password("asda123").build());
+					.userName("user")
+					.password("$2a$10$Ng7JXd.i11/h5jnNSlrHvOKFVKZQXqKV7EDlITbE8DK8fS8kl4o5a")
+					.enabled(1)
+					.rols(rolSrv.getRols())
+					.build());
+
 
 			userSrv.save(User.builder()
 					.name("aaassfgsfga")
@@ -55,8 +65,11 @@ public class ProjectLibraryApplication implements WebMvcConfigurer {
 					.email("rrrrr@bbbb.com")
 					.phone("2312q2452454")
 					.birthDate(LocalDate.parse("1999-03-12"))
-					.userName("aaaaaaa")
-					.password("asda123").build());
+					.userName("admin")
+					.password("$2a$10$Se/ODgodjkLcCHl/FLHog.hTRqpDkEeBsAhKUxDyjknU2MfhKPjhm")
+					.enabled(1)
+					.rols(rolSrv.getRols())
+					.build());
 
 			bookSrv.save(Book.builder()
 					.title("Alicia en el País de las Maravillas")
@@ -190,7 +203,36 @@ public class ProjectLibraryApplication implements WebMvcConfigurer {
 					.book(bookSrv.getBook(1))
 					.user(userSrv.getUser(1))
 					.user2(userSrv.getUser(2)).build());
+
+			rolSrv.save(Rol.builder().rol("ROLE_USER")
+
+					.user_id(1).id(1).build());
+		
+		
+		
+			rolSrv.save(Rol.builder().rol("ROLE_ADMIN")
+		
+					.user_id(2).id(2).build());
 		};
 
 	}
+
+	@Override
+
+    public void run(String... args) throws Exception {
+
+        String pass1="user";
+
+        String pass2="admin";
+
+
+
+        System.out.println(passEncoder.encode(pass1));
+
+        System.out.println(passEncoder.encode(pass2));
+
+       
+
+    }
+
 }

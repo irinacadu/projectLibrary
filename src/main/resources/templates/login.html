@@ -1,27 +1,115 @@
-<!-- <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link src="" >
-    <title>Login</title>
-</head>
-<body>
-    <h1>Loguéate</h1>
-    <form action= " " >
-        <div>
-        <label for="username">Nombre de usuario</label>
-        <input type="text" name="username">
-        <br>
-        <br>
-        <label for="password">Contraseña</label>
-        <input type="password" name="password">
-    </div>
+<!doctype html>
+<html lang="en">
+  <head th:fragment="cabecera">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <div>
-        <input type="submit"
-    </div>
-    </form>
-</body>
-</html> -->
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;600&display=swap" rel="stylesheet">
+
+
+    <title>Log In</title>
+    
+
+    <style>
+      .carousel-item{
+        height: 600px;
+        width: 600px;
+      }
+
+      :root {
+    --dark: #16191c;
+    --dark-x: #1e2126;
+    --light: #ffffff;
+
+
+}
+
+#cuerpo {
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 300;
+    color: var(--light);
+    
+}
+
+.bg-dark {background-color: var(--dark) !important;}
+.bg-dark-x {background-color: var(--dark-x);}
+
+.form-control, .btn {
+    min-height: 3.125rem;
+    line-height: initial;
+}
+    </style>
+  </head>
+  <body class="bg-dark" id="cuerpo">
+    <section>
+        <div class="row g-0"> 
+          <!-- el g-0 es para quitar el scroll horizontal -->
+            <div class="col-lg-7">
+              <div class="container">
+              <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+                <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  
+                </div>
+                <div class="carousel-inner">
+                  <div class="carousel-item img-1 min-vh-100 active">
+                    <img src="bb.jpg" alt="">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="biblio.jpg" class="d-block w-100">
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            </div>
+          </div>
+            <div class="col-lg-5 d-flex flex-column align-items-end min-vh-100">
+                <div class="px-lg-5 pt-lg-4 pb-lg-3 p-4 w-100 mb-auto">
+                    <p style="color: #ffffff;">logo</p>
+                </div>
+                <div class="px-lg-5 py-lg-4 p-4 w-100 align-self-center">
+                    <h1 class="font-weight-bold nb-4">Sign In</h1>
+                    <form>
+                      <div class="mb-4">
+                        <label for="exampleInputEmail1" class="form-label">Email</label>
+                        <input type="email" class="form-control bg-dark-x border-0" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email">
+                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                      </div>
+                      <div class="mb-4">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" class="form-control bg-dark-x border-0 mb-2" id="exampleInputPassword1" placeholder="Enter your password">
+                        <!-- <a href:"#" id="emailHelp" class="form-text text-muted text-decoration-none" href="http://localhost:8080/update/{id}">Forgot your password?</a> -->
+                      </div>
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-primary w-100" th:href="@{/catalogue}">Sign In</button>
+                      </div>
+                    </form>
+                    <div class="text-center px-lg-5 pt-lg-3 pb-lg-4 p-4 w-100 mt-auto">
+                      <p class="d-inline-block mb-0">You don't have an acount yet?</p> 
+                      <a th:href="@{/userform}" class="text-light font-weight-bold">Create one.</a>
+                    </div>
+                </div>
+                
+                </div>
+                
+            </div>
+            
+        </div>
+    </section>
+
+    <script th:fragment="javascriptsupport" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+  </body>
+</html>

@@ -1,6 +1,7 @@
 package com.library.entities;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,7 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 
@@ -74,14 +75,22 @@ public class User {
     private List<Opinion> opinion;
 
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user")
-    private List<Book> book;
+    // @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user")
+    // private List<Book> book;
 
-    // ESTA DA ERROR
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user")
-    private List<Prestamo> prestamoPrestador;
+    // // ESTA DA ERROR
+    // @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user")
+    // private List<Prestamo> prestamoPrestador;
     
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user2")
-    private List<Prestamo> prestamoPrestado;
+    // @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user2")
+    // private List<Prestamo> prestamoPrestado;
+
+    private int enabled;
+
+
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL )
+
+     private Collection<Rol> rols;
     
 }
