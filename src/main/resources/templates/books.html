@@ -15,16 +15,14 @@
             <th>Título</th>
             <th>Autor</th>
             <th>Detalles</th>
-            <th>Modificar</th>
-            <th>Borrar</th>
         </tr>
     </thead>
     <tbody th:each=" book : ${listaLibros}">
         <td th:text="${book.title}"></td>
         <td th:text="${book.author}"></td>
         <td><a th:href="@{/details/} + ${book.id}">Ver</a></td>
-        <td><a th:href="@{/update/} + ${book.id}">Ver</a></td>
-        <td><a th:href="@{/deletebook/} + ${book.id}">Ver</a></td>
+        <td><a th:href="@{/update/} + ${book.id}">Modificar</a></td>
+        <td><a th:href="@{/deletebook/} + ${book.id}">Borrar</a></td>
 
     </tbody>
    </table>
