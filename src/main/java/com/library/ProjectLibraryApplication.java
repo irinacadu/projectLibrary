@@ -45,7 +45,7 @@ public class ProjectLibraryApplication implements WebMvcConfigurer {
 					.surname("BBBbbbbbbbbbb")
 					.email("aaaa@bbbb.com")
 					.phone("28323123")
-					.fechaNacimiento(LocalDate.parse("1989-03-12"))
+					.birthDate(LocalDate.parse("1989-03-12"))
 					.userName("asaassdasd")
 					.password("asda123").build());
 
@@ -54,7 +54,7 @@ public class ProjectLibraryApplication implements WebMvcConfigurer {
 					.surname("nnnnn")
 					.email("rrrrr@bbbb.com")
 					.phone("2312q2452454")
-					.fechaNacimiento(LocalDate.parse("1999-03-12"))
+					.birthDate(LocalDate.parse("1999-03-12"))
 					.userName("aaaaaaa")
 					.password("asda123").build());
 
@@ -160,11 +160,21 @@ public class ProjectLibraryApplication implements WebMvcConfigurer {
 					.opinions(opinionSrv.getOpiniones())
 					.build());
 
-					bookSrv.save(Book.builder()
+			bookSrv.save(Book.builder()
 					.title("Una Habitación Propia")
 					.author("Virginia Woolf")
 					.sinopsis("En 1928 a Virginia Woolf le propusieron dar una serie de charlas sobre el tema de la mujer y la novela. Lejos de cualquier dogmatismo o presunción, planteó la cuestión desde un punto de vista realista, valiente y muy particular. Una pregunta: ¿qué necesitan las mujeres para escribir buenas novelas? Una sola respuesta: independencia económica y personal, es decir, Una habitación propia. Sólo hacía nueve años que se le había concedido el voto a la mujer y aún quedaba mucho camino por recorrer.")
 					.photo("habitacion.jpg")
+					.genre(genreSrv.getGenre(7))
+					.user(userSrv.getUser(1))
+					.opinions(opinionSrv.getOpiniones())
+					.build());
+
+			bookSrv.save(Book.builder()
+					.title("La Ridícula Idea de No Volver a Verte")
+					.author("Rosa Montero")
+					.sinopsis("Cuando Rosa Montero leyó el maravilloso diario que Marie Curie comenzó tras la muerte de su esposo, y que se incluye al final de este libro, sintió que la historia de esa mujer fascinante que se enfrentó a su época le llenaba la cabeza de ideas y emociones.")
+					.photo("ridicula.jpg")
 					.genre(genreSrv.getGenre(7))
 					.user(userSrv.getUser(1))
 					.opinions(opinionSrv.getOpiniones())

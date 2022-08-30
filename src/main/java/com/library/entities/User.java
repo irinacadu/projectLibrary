@@ -55,7 +55,7 @@ public class User {
 
   
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate fechaNacimiento;
+    private LocalDate birthDate;
 
     @NotEmpty
    // @Size(min=5,max=15, message= "La longitud del nombre de usuario debe estar entre 5 y 15 caracteres")

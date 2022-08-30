@@ -17,18 +17,37 @@
 </head>
 
 <body>
+  <header>
+    <div class="col">
+      <div class="row">
+          <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark" style="background-color: black;">
+              <div class="container">
+                  <a href="/catalogue" class="navbar-brand mb-0 h1">
+                      <img class="d-inline-block align-top" src="/images/logo.jpg" alt="logo" height="30px"
+                          width="AUTO">
 
-
-  <header class="ScriptHeader">
-    <div class="rt-container">
-      <div class="col-rt-12">
-        <div class="rt-heading">
-          <h1>User Profile Page</h1>
-        </div>
+                  </a>
+                  <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" class="navbar-toggler"
+                      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation">
+                      <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNav">
+                      <ul class="navbar-nav">
+                          <li class="nav-item active">
+                              <a href="/userProfile.html" class="nav-link">
+                                  Your account
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </nav>
       </div>
-    </div>
+  </div> 
   </header>
 
+
+<br><br><br>
   <section>
     <div class="rt-container">
       <div class="col-rt-12">
@@ -42,12 +61,13 @@
                   <div class="card shadow-sm">
                     <div class="card-header bg-transparent text-center">
                       <img class="profile_img" src="https://source.unsplash.com/600x300/?student" alt="student dp">
-                      <h3>Name of User</h3>
+                      <h3><td th:text="${user.name}"></td></h3>
                     </div>
 
                     <div class="card-body col text-center">
-                      <p class="mb-0"><strong class="pr-1">username:</strong>321000001</p>
-                      <a class="btn btn-primary" href="updateUser.html" role="button">Update User</a>
+                      <p class="mb-0"><strong class="pr-1"><td th:text="${user.userName}"></td></strong></p>
+                      <br>
+                      <a class="btn btn-primary" th:href="@{/updateuser/} + ${user.id}" role="button">Update User</a>
                     </div>                    
                   </div>
                 </div>
@@ -66,7 +86,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                          <tr th:each="user : ${userslist}">
+                          <tr th:each="user : ${usersList}">
                             <td th:text="${user.id}"></td>
                             <td th:text="${user.name}"></td>
                             <td th:text="${user.surname}"></td>

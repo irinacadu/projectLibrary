@@ -6,8 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.library.entities.User;
 import com.library.services.IServiceUser;
@@ -34,16 +36,16 @@ public class MainController {
 
     }
 
-    @GetMapping("/usersList")
+    @GetMapping("/users")
     public String getEstudiantes(Model model) {
 
 
 
-       model.addAttribute("usersList", userService.getUsers());
+       model.addAttribute("users", userService.getUsers());
 
 
 
-       return "usersList";
+       return "users";
     }
 
 @PostMapping("/createUser")
@@ -83,7 +85,51 @@ public class MainController {
 
        
 
-    return"redirect:/usersList"; // esto te devuelve el listado de estudiantes + nuevo estudiante creado
+    return"redirect:/users"; // esto te devuelve el listado de estudiantes + nuevo estudiante creado
 }
 
+@GetMapping("/detailsuser/{id}")
+
+public ModelAndView detailsUser(@PathVariable(name = "id") int id) {
+
+    User user = userService.getUser(id);
+
+    ModelAndView mav = new ModelAndView();
+
+
+
+    mav.setViewName("userdetails");
+
+    mav.addObject("user", user);
+
+
+
+    return mav;
+
 }
+
+@GetMapping("/updateuser/{id}")
+
+    public ModelAndView updateUser(@PathVariable(name = "id") int id) {
+
+        User user = userService.getUser(id);
+
+        ModelAndView mav = new ModelAndView();
+
+
+
+        mav.setViewName("userReg");
+
+        mav.addObject("user", user);
+
+
+
+        return mav;
+
+
+
+    }
+
+
+}
+

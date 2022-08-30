@@ -36,6 +36,107 @@
             width: auto;
             margin: 0 auto;
         }
+    
+        
+    </style>
+
+<style>
+    #hcg-slider-1 .hcg-slide-container {
+        width: auto;
+        height: 300px;
+    }
+    .hcg-slider {
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .hcg-slide-container {
+        max-width: 100%;
+        display: inline-block;
+        position: relative;
+    }
+    .hcg-slides {
+        display: none;
+        text-align: center;
+        overflow: hidden;
+    }
+    .hcg-slides img {
+        max-width: auto;
+        max-height: 300px;
+        display: inline-block;
+        border-radius: 5px;
+        border: solid 1px #a0a0a0;
+        vertical-align: middle;
+    }
+    .hcg-slide-prev, .hcg-slide-next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        padding: 16px;
+        margin-top: -22px;
+        color: #fff;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        text-decoration: none;
+    }
+    .hcg-slide-next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+    }
+    .hcg-slide-prev {
+        left: 0;
+        border-radius: 0 3px 3px 0;
+    }
+    .hcg-slide-prev:hover, .hcg-slide-next:hover {
+        background-color: #000c;
+    }
+    .hcg-slide-dot-control {
+        margin-top: 10px;
+        text-align: center;
+    }
+    .hcg-slide-dot {
+        cursor: pointer;
+        height: 13px;
+        width: 13px;
+        margin: 0 2px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+    }
+    .hcg-slide-dot.dot-active {
+        background-color: #717171;
+    }
+    .hcg-slide-number {
+        color: #ffffff;
+        font-size: 12px;
+        padding: 4px 7px;
+        position: absolute;
+        border-radius: 5px;
+        top: 5px;
+        left: 5px;
+        background-color: rgba(255,255,255,0.30);
+    }
+    /************CSS Animation***********/
+    
+    .animated { 
+        animation-name: fadeIn; 
+        animation-duration: 1s;
+    }
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    .fadeIn {
+        animation-name: fadeIn;
+    }
+    
+    
     </style>
 
 </head>
@@ -45,10 +146,10 @@
         <div class="row">
             <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark" style="background-color: black;">
                 <div class="container">
-                    <a href="#" class="navbar-brand mb-0 h1">
+                    <a href="/catalogue" class="navbar-brand mb-0 h1">
                         <img class="d-inline-block align-top" src="/images/logo.jpg" alt="logo" height="30px"
                             width="AUTO">
-                        
+
                     </a>
                     <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" class="navbar-toggler"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation">
@@ -57,7 +158,7 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item active">
-                                <a href="#" class="nav-link">
+                                <a href="/userProfile.html" class="nav-link">
                                     Your account
                                 </a>
                             </li>
@@ -73,51 +174,21 @@
     <br>
     <br>
 
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="col-md-2"></div>
-            <div class="col-md-2"></div>
-            <div class="col-md-2">
-                <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
-                            class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                            aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                            aria-label="Slide 3"></button>
-                    </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="/images/1984.jpg" class="img-responsive center-block" alt="...">
-                        </div>
-
-
-                        <div class="carousel-item">
-                            <img src="/images/451.jpg" class="d-block w-100 img-fluid" alt="...">
-                        </div>
-
-                        <div class="carousel-item">
-                            <img src="/images/grandes.jpg" class="d-block w-100 img-fluid" alt="...">
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+    <div id="hcg-slider-1" class="hcg-slider">
+        <div class="hcg-slide-container">
+            <div class="hcg-slider-body">
+                <a class="hcg-slides animated" style="display:block">
+                    <span class="hcg-slide-number">1/5</span>
+                    <img src="https://html-generator.com/uploads/images/2022/08/30/91353AW2EQLS1MW.jpg" alt="91353AW2EQLS1MW.jpg">
+                    <span class="hcg-slide-text">91353AW2EQLS1MW.jpg</span>
+                </a>
             </div>
-            <div class="col-md-6"></div>
+            <a class="hcg-slide-prev" href="#">❮</a>
+            <a class="hcg-slide-next" href="#">❯</a>
         </div>
-    </div>
-    </div>
-    </div>
+        <div class="hcg-slide-dot-control"></div>
+        </div>
+        
 
     <br>
     <br>
@@ -152,6 +223,22 @@
         </table>
     </div>
 
+<div class="container">
+    <div class="row">
+        <div class="col d-flex flex-column justify-content-center align-items-center">
+        <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#"><</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">></a></li>
+        </ul>
+    </nav>
+</div>
+</div>
+</div>
+
     <script>
         $(document).ready(function () {
             $("#myInput").on("keyup", function () {
@@ -163,7 +250,85 @@
         });
     </script>
 
+<script>
+    (function(){
+    //If you want to include more images, add the link name and URL of the image in the array list below.
+        let images_list = [
+            {"url":"https://html-generator.com/uploads/images/2022/08/30/91353AW2EQLS1MW.jpg","name":"91353AW2EQLS1MW.jpg","link":""},
+            {"url":"https://html-generator.com/uploads/images/2022/08/30/92017XN906S_D64.jpg","name":"92017XN906S_D64.jpg","link":""},
+            {"url":"https://html-generator.com/uploads/images/2022/08/30/92797C8WV85FG60.jpg","name":"92797C8WV85FG60.jpg","link":""},
+            {"url":"https://html-generator.com/uploads/images/2022/08/30/93535REA0AKJKI6.jpeg","name":"93535REA0AKJKI6.jpeg","link":""},
+            {"url":"https://html-generator.com/uploads/images/2022/08/30/94306NHTT6DYJ3A.jpg","name":"94306NHTT6DYJ3A.jpg","link":""},
+            {"url":"https://html-generator.com/uploads/images/2022/08/30/95081Z8IPHI_TQY.jpg","name":"95081Z8IPHI_TQY.jpg","link":""},
+            {"url":"https://html-generator.com/uploads/images/2022/08/30/96024DIKFIJDTLT.jpg","name":"96024DIKFIJDTLT.jpg","link":""},
+            {"url":"https://html-generator.com/uploads/images/2022/08/30/96303GNRICB4PRQ.jpg","name":"96303GNRICB4PRQ.jpg","link":""},
+            {"url":"https://html-generator.com/uploads/images/2022/08/30/98955FRUJ3PEANJ.jpg","name":"98955FRUJ3PEANJ.jpg","link":""},
+            {"url":"https://html-generator.com/uploads/images/2022/08/30/0190041NSZA7F1P.jpg","name":"0190041NSZA7F1P.jpg","link":""}
+        ];
     
+        let slider_id = document.querySelector("#hcg-slider-1");
+    
+        // append all images
+        let dots_div = "";
+        let images_div = "";
+        for (let i = 0; i < images_list.length; i++) {
+            // if no link without href="" tag
+            let href = (images_list[i].link == "" ? "":' href="'+images_list[i].link+'"');
+            images_div += '<a'+href+' class="hcg-slides animated"'+(i === 0 ? ' style="display:block"':'')+'>'+
+                            '<span class="hcg-slide-number">'+(i+1)+'/'+images_list.length+'</span>'+
+                            '<img src="'+images_list[i].url+'" alt="'+images_list[i].name+'">'+
+                         '</a>';
+            dots_div += '<span class="hcg-slide-dot'+(i === 0 ? ' dot-active':'')+'" data-id="'+i+'"></span>';
+        }
+        slider_id.querySelector(".hcg-slider-body").innerHTML = images_div;
+        slider_id.querySelector(".hcg-slide-dot-control").innerHTML = dots_div;
+    
+        let slide_index = 0;
+    
+        let images = slider_id.querySelectorAll(".hcg-slides");
+        let dots = slider_id.querySelectorAll(".hcg-slide-dot");
+        let prev_button = slider_id.querySelector(".hcg-slide-prev");
+        let next_button = slider_id.querySelector(".hcg-slide-next");
+    
+        function showSlides() {
+            if (slide_index > images.length-1) {
+                slide_index = 0;
+            }
+            if (slide_index < 0) {
+                slide_index = images.length-1;
+            }
+            for (let i = 0; i < images.length; i++) {
+                images[i].style.display = "none";
+                dots[i].classList.remove("dot-active");
+                if (i == slide_index) {
+                    images[i].style.display = "block";
+                    dots[i].classList.add("dot-active");
+                }
+            }
+        }
+    
+        prev_button.addEventListener("click", function(event) {
+            event.preventDefault();
+            slide_index--;
+            showSlides();
+        }, false);
+    
+        next_button.addEventListener("click", function(event){
+            event.preventDefault();
+            slide_index++;
+            showSlides();
+        }, false);
+    
+        function dot_click(event) {
+            slide_index = event.target.dataset.id;
+            showSlides();
+        }
+    
+        for (let i = 0; i < dots.length; i++) {
+            dots[i].addEventListener("click", dot_click, false);
+        }
+    })();
+    </script>
 
 
     <!-- NO BORRAR -->
