@@ -24,7 +24,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder 
 
 public class Book {
 
@@ -36,6 +36,8 @@ private String title;
 private String author;
 @Size (min = 2, max = 4000)
 private String sinopsis;
+
+private String availability;
 // private String photo;
 
 // @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.MERGE, mappedBy = "book")

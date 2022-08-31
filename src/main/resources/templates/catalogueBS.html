@@ -131,6 +131,7 @@
                     <th>Título</th>
                     <th>Autor</th>
                     <th>Género</th>
+                    <th>Disponible</th>
 
                     <!-- <th>Detalles</th>
                     <th>Modificar</th>
@@ -143,6 +144,7 @@
                 </td>
                 <td th:text="${book.author}"></td>
                 <td th:text="${book.genre.genre}"></td>
+                <td th:text="${book.availability}"></td>
                 <!-- <td><a th:href="@{/detailsbook/} + ${book.id}">Ver</a></td> -->
                 <!-- <td><a th:href="@{/newloanbook/} + ${book.id}" type="submit" id="botonPrueba" value="aceptar" >Aceptar</a></td> -->
 

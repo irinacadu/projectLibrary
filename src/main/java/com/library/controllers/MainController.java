@@ -135,7 +135,7 @@ public class MainController {
 
         ModelAndView mav = new ModelAndView();
 
-        mav.setViewName("bookdetails");
+        mav.setViewName("catalogueBs");
         mav.addObject("user", user);
 
         return mav;
@@ -145,15 +145,19 @@ public class MainController {
 
 
     @GetMapping("/newloanbook/{id}")
-    public String newLoanBook(
-            @PathVariable(name = "id") int id
+    public ModelAndView newLoanBook(
+            @PathVariable(name = "id") int id,Model model
 
     ) {
+
+        model.addAttribute("booksList", bookService.getBooks());
 
         LocalDate today = LocalDate.now();
         List<Loan> loans = loanService.getLoans();
         int longLoans= loans.size();
-
+ 
+        Book book=bookService.getBook(id);
+        book.setAvailability("no");
         // if(longLoans == 0){
         // longLoans=1;
         // }else{
@@ -164,9 +168,12 @@ public class MainController {
         l.setDeliveryDate(today);
         l.setDueDate(null);
         loanService.save(l);
-        // }
+     
+        ModelAndView mav = new ModelAndView();
 
-        return "redirect:/loanslist";
+        mav.setViewName("catalogueBs");
+
+        return mav;
 
     }
 //NO TENGO CLARO SI NECESITAMOS ESTO
@@ -192,8 +199,8 @@ public class MainController {
         return mav;
     }
 
-    @GetMapping("/update/{id}")
-    public ModelAndView updateUser(@PathVariable(name = "user") int id) {
+    @GetMapping("/updateuser/{id}")
+    public ModelAndView updateUser(@PathVariable(name = "id") int id) {
         User user = userService.getUser(id);
         ModelAndView mav = new ModelAndView();
 
@@ -264,8 +271,8 @@ public class MainController {
 
     @GetMapping("/catalogue")
     public String getBooks(Model model) {
+        
         model.addAttribute("listaLibros", bookService.getBooks());
-
         return "catalogueBs";
     }
 
