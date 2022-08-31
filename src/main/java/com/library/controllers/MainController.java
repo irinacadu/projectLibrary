@@ -73,25 +73,26 @@ public class MainController {
 
     @PostMapping("/createuser")
     public String crearUser(@ModelAttribute(name = "id") User user
-    
-            // @RequestParam(name = "image", required = false) MultipartFile photo
-            ) {
+
+    // @RequestParam(name = "image", required = false) MultipartFile photo
+    ) {
         // if (photo != null) {
-            // String rutaAbsoluta = "C://Users//icasasdu//Documents//recursos";
-            // Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + photo.getOriginalFilename());
+        // String rutaAbsoluta = "C://Users//icasasdu//Documents//recursos";
+        // Path rutaCompleta = Paths.get(rutaAbsoluta + "//" +
+        // photo.getOriginalFilename());
 
-            // try {
+        // try {
 
-            //     byte[] bytesFoto = photo.getBytes();
-                // Files.write(rutaCompleta, bytesFoto);
-                // user.setPhoto(photo.getOriginalFilename());
-                userService.save(user);
+        // byte[] bytesFoto = photo.getBytes();
+        // Files.write(rutaCompleta, bytesFoto);
+        // user.setPhoto(photo.getOriginalFilename());
+        userService.save(user);
 
-        //     } catch (Exception e) {
+        // } catch (Exception e) {
 
-        //         e.printStackTrace();
+        // e.printStackTrace();
 
-        //     }
+        // }
         // }
 
         return "redirect:/userslist";
@@ -105,30 +106,27 @@ public class MainController {
     // // @RequestMapping(value = "/createloan", method = { RequestMethod.GET,
     // // RequestMethod.POST })
     // public String createLoan(@ModelAttribute(name = "loan") Loan loan,
-    //         Model model
-    
+    // Model model
+
     // ) {
 
+    // // loan.setDeliveryDate(today);
+    // loan.setDueDate(null);
+    // // loan.setUser2(null);
+    // loanService.save(loan);
 
+    // ModelAndView mav = new ModelAndView();
+    // mav.setViewName("loanslist");
+    // mav.addObject("loan", loan);
 
-    //     // loan.setDeliveryDate(today);
-    //     loan.setDueDate(null);
-    //     // loan.setUser2(null);
-    //     loanService.save(loan);
-
-    //     ModelAndView mav = new ModelAndView();
-    //     mav.setViewName("loanslist");
-    //     mav.addObject("loan", loan);
-
-    //     return "redirect:/loanslist";
+    // return "redirect:/loanslist";
     // }
 
- 
     @GetMapping("/newloanuser/{id}")
     public ModelAndView newLoanUser(@PathVariable(name = "id") int id,
             Model model, Loan loan) {
 
-       loan.setUser(userService.getUser(id));
+        loan.setUser(userService.getUser(id));
         loanService.save(loan);
         model.addAttribute("booksList", bookService.getBooks());
         User user = userService.getUser(id);
@@ -137,16 +135,13 @@ public class MainController {
 
         mav.setViewName("catalogueBs");
         mav.addObject("user", user);
-
         return mav;
 
     }
 
-
-
     @GetMapping("/newloanbook/{id}")
     public ModelAndView newLoanBook(
-            @PathVariable(name = "id") int id,Model model
+            @PathVariable(name = "id") int id, Model model
 
     ) {
 
@@ -154,39 +149,50 @@ public class MainController {
 
         LocalDate today = LocalDate.now();
         List<Loan> loans = loanService.getLoans();
-        int longLoans= loans.size();
- 
-        Book book=bookService.getBook(id);
+        int longLoans = loans.size();
+
+        Book book = bookService.getBook(id);
         book.setAvailability("no");
         // if(longLoans == 0){
         // longLoans=1;
         // }else{
         Loan l = loans.get(longLoans - 1);
-
         l.setBook(bookService.getBook(id));
-
         l.setDeliveryDate(today);
         l.setDueDate(null);
         loanService.save(l);
-     
         ModelAndView mav = new ModelAndView();
-
         mav.setViewName("catalogueBs");
-
         return mav;
 
     }
-//NO TENGO CLARO SI NECESITAMOS ESTO
 
-    // @GetMapping("/loan")
-    // public ModelAndView getLoan(@PathVariable(name = "loan") int id) {
+    @GetMapping("/returnbook/{id}")
+    public ModelAndView returnbook(Model model, @PathVariable(name = "id") int id) {
+        model.addAttribute("booksList", bookService.getBooks());
+        List<Loan> loanlist = loanService.getLoans();
+        Book book = bookService.getBook(id);
 
-    //     Loan loan = loanService.getLoan(id);
-    //     ModelAndView mav = new ModelAndView();
-    //     mav.setViewName("prestamoCreado");
-    //     mav.addObject("loan", loan);
-    //     return mav;
-    // }
+        LocalDate today = LocalDate.now();
+
+        for (Loan loan : loanlist) {
+            LocalDate dueDate = loan.getDueDate();
+            Book loanBook = loan.getBook();
+            if (dueDate == null && loanBook.getId() == book.getId()) {
+                loan.setDueDate(today);
+                loanService.save(loan);
+                book.setAvailability(" ");
+                bookService.save(book);
+            }
+
+        }
+
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("catalogueBs");
+        // mav.addObject(, attributeValue)
+        return mav;
+
+    }
 
     @GetMapping("/detailsuser/{id}")
     public ModelAndView detailsUser(@PathVariable(name = "id") int id) {
@@ -215,6 +221,56 @@ public class MainController {
     public String deleteUSer(@PathVariable(name = "user") int id) {
         userService.delete(id);
         return "redirect:/userslist";
+
+    }
+
+    @GetMapping("/userloans/{id}")
+    public ModelAndView getUserLoans(Model model, @PathVariable(name = "id") int id) {
+
+        List<Loan> loanlist = loanService.getLoans();
+        User userLoan = userService.getUser(id);
+
+        ModelAndView mav = new ModelAndView();
+
+        for (Loan loan : loanlist) {
+
+            if (loan.getUser().equals(userLoan)) {
+                Book book = loan.getBook();
+                int i = book.getId();
+                Book b2 = bookService.getBook(i);
+
+                mav.addObject("loansUser", loan);
+                mav.addObject("bookUser", b2);
+
+                mav.setViewName("loansuserdetails");
+
+            }
+
+        }
+
+        return mav;
+
+        // List<Loan> loanlist = loanService.getLoans();
+        // Book book = bookService.getBook(id);
+
+        // LocalDate today = LocalDate.now();
+
+        // for (Loan loan : loanlist) {
+        // LocalDate dueDate = loan.getDueDate();
+        // Book loanBook = loan.getBook();
+        // if (dueDate == null && loanBook.getId() == book.getId()) {
+        // loan.setDueDate(today);
+        // loanService.save(loan);
+        // book.setAvailability(" ");
+        // bookService.save(book);
+        // }
+
+        // }
+
+        // ModelAndView mav = new ModelAndView();
+        // mav.setViewName("catalogueBs");
+        // // mav.addObject(, attributeValue)
+        // return mav;
 
     }
 
@@ -271,7 +327,7 @@ public class MainController {
 
     @GetMapping("/catalogue")
     public String getBooks(Model model) {
-        
+
         model.addAttribute("listaLibros", bookService.getBooks());
         return "catalogueBs";
     }

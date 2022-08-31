@@ -97,7 +97,7 @@
                       <div class="card-body col text-center">
                         <div class="button">
                         <a class="btn btn-success" th:href="@{/newloanbook/} + ${book.id}" type="submit" id="botonPrueba" value="aceptar" role="button">Take Book</a>
-                        <a class="btn btn-danger" href="#" role="button">Return Book</a>
+                        <a class="btn btn-danger" th:href="@{/returnbook/} + ${book.id}" role="button">Return Book</a>
                       </div>
                     </div>
                     </div>
