@@ -69,10 +69,6 @@ public class User {
     private String password;
 
 
-    // ESTA RELACION DA ERROR
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user")
-    private List<Opinion> opinion;
-
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user")
     private List<Book> book;

@@ -3,7 +3,7 @@ package com.library.controllers;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
+
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.library.entities.Book;
-import com.library.entities.Opinion;
+
 import com.library.entities.User;
 import com.library.services.IServiceBook;
-import com.library.services.IServiceOpinion;
+
 
 @Controller
 @RequestMapping("/")
@@ -32,8 +32,6 @@ public class BookController {
     @Autowired
     IServiceBook bookService;
 
-    @Autowired
-    IServiceOpinion opinionService;
 
     @GetMapping("/login")
     public String login(ModelMap model) {
@@ -62,11 +60,10 @@ public class BookController {
     @GetMapping("/formulario")
     public String showFormulario(ModelMap map) {
         map.addAttribute("book", new Book());
-        map.addAttribute("opinions", opinionService.getOpiniones());
+        
 
         return "bookForm";
     }
-
     @GetMapping("/details/{id}")
     public ModelAndView details(@PathVariable(name = "id") String id ) {
 
@@ -83,11 +80,11 @@ public class BookController {
      public ModelAndView update(@PathVariable(name = "id") String id) {
 
         Book book = bookService.getBook(Integer.parseInt(id));
-        List<Opinion> opinions = opinionService.getOpiniones();
+        
         ModelAndView mav = new ModelAndView();
         mav.setViewName("bookForm");
         mav.addObject("book", book);
-        mav.addObject("opinion", opinions);
+       
 
         return mav;
      }

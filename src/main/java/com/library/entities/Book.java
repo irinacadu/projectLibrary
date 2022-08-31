@@ -1,6 +1,6 @@
 package com.library.entities;
 
-import java.util.List;
+
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
 
 
 import lombok.AllArgsConstructor;
@@ -37,8 +37,6 @@ private String author;
 private String sinopsis;
 private String photo;
 
-@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.MERGE, mappedBy = "book")
-private List<Opinion> opinions;
 
 @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
 private User user;

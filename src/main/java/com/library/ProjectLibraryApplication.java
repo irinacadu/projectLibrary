@@ -9,12 +9,12 @@ import org.springframework.context.annotation.Bean;
 
 import com.library.entities.Book;
 import com.library.entities.Genre;
-import com.library.entities.Opinion;
+
 import com.library.entities.Prestamo;
 import com.library.entities.User;
 import com.library.services.IServiceBook;
 import com.library.services.IServiceGenre;
-import com.library.services.IServiceOpinion;
+
 import com.library.services.IServicePrestamo;
 import com.library.services.IServiceUser;
 
@@ -26,7 +26,7 @@ public class ProjectLibraryApplication {
 	}
 	@Bean
     public CommandLineRunner demoData(IServiceUser userSrv, IServiceBook bookSrv, 
-	IServiceOpinion opinionSrv, IServicePrestamo prestamoSrv, IServiceGenre genreSrv){
+	 IServicePrestamo prestamoSrv, IServiceGenre genreSrv){
         return args -> {
 
 			//facultadSrv.save(Facultad.builder().nombre("INFORMATICA").build());
@@ -58,13 +58,9 @@ public class ProjectLibraryApplication {
 			.photo("a.jpg")
 			.genre(genreSrv.getGenre(1))
 			.user(userSrv.getUser(1))
-			.opinions(opinionSrv.getOpiniones())
+			
 			.build());
 
-
-			opinionSrv.save(Opinion.builder().opinion("lkjlkjlkj")
-			.book(bookSrv.getBook(1))
-			.user(userSrv.getUser(1)).build());
 
 
 			prestamoSrv.save(Prestamo.builder()
