@@ -90,7 +90,7 @@ public class BookController {
      }
 
      @PostMapping("/createBook")
-     public String createBook(@ModelAttribute(name = "estudiante") Book book, 
+     public String createBook(@ModelAttribute(name = "book") Book book, 
      @RequestParam(name = "imagen", required = false) MultipartFile foto) {
  
          if (foto != null) {
