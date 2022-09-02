@@ -74,17 +74,19 @@
                         <td th:text="${user.phone}"></td>
                         <td th:text="${user.password}"></td>
 
-                        
-                        <td><a th:href="@{/detailsuser/} + ${user.id}"> Detalles </a></td>
-                        
+
+                        <td><a th:href="@{/userloans/} + ${user.id}"> Detalles </a></td>
+
                         <td><a th:href="@{/updateuser/} + ${user.id}"> Modificar </a></td>
-                        <td><a th:href="@{/delete/} + ${user.id}"> Eliminar </a></td>
+                        <td><a th:href="@{/deleteuser/} + ${user.id}"> Eliminar </a></td>
                         <td><a th:href="@{/newloanuser/} + ${user.id}"> Seleccionar Usuario </a></td>
-                        <td><a th:href="@{/userloans/} + ${user.id}"> Prestamos Usuario </a></td>
+                        <!-- <td><a th:href="@{/userloans/} + ${user.id}"> Prestamos Usuario </a></td> -->
                     </tr>
 
                 </tbody>
             </table>
+            <a th:href="@{/userform/}" class="btn btn-danger btn-lg active" role="button">Create User</a>
+            <a th:href="@{/catalogue/}" class="btn btn-danger btn-lg active" role="button">Return Catalogue</a>
         </div>
     </div>
 

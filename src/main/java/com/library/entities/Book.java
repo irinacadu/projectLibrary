@@ -38,7 +38,7 @@ private String author;
 private String sinopsis;
 
 private String availability;
-// private String photo;
+private String photo;
 
 // @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.MERGE, mappedBy = "book")
 // private List<Opinion> opinions;

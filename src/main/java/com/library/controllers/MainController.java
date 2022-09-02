@@ -6,7 +6,6 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.hibernate.validator.constraints.pl.REGON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.FlashMapManager;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.library.entities.Book;
@@ -55,6 +52,13 @@ public class MainController {
         return "login";
     }
 
+    @GetMapping("/catalogue")
+    public String getBooks(Model model) {
+
+        model.addAttribute("booksList", bookService.getBooks());
+        return "catalogueBs";
+    }
+
     @GetMapping("/userform")
     public String userForm(ModelMap map) {
         map.addAttribute("user", new User()); // se llama al objeto y lo crea vacío para poder rellenarlo
@@ -72,55 +76,30 @@ public class MainController {
     }
 
     @PostMapping("/createuser")
-    public String crearUser(@ModelAttribute(name = "id") User user
+    public String crearUser(@ModelAttribute(name = "id") int id, User user,
+            @RequestParam(name = "imagen", required = false) MultipartFile photo) {
+        if (photo != null) {
+            String rutaAbsoluta = "C://Users//icasasdu//Documents//recursos";
+            Path rutaCompleta = Paths.get(rutaAbsoluta + "//" +
+                    photo.getOriginalFilename());
 
-    // @RequestParam(name = "image", required = false) MultipartFile photo
-    ) {
-        // if (photo != null) {
-        // String rutaAbsoluta = "C://Users//icasasdu//Documents//recursos";
-        // Path rutaCompleta = Paths.get(rutaAbsoluta + "//" +
-        // photo.getOriginalFilename());
+            try {
 
-        // try {
+                byte[] bytesFoto = photo.getBytes();
+                Files.write(rutaCompleta, bytesFoto);
+                user.setPhoto(photo.getOriginalFilename());
+                userService.save(user);
 
-        // byte[] bytesFoto = photo.getBytes();
-        // Files.write(rutaCompleta, bytesFoto);
-        // user.setPhoto(photo.getOriginalFilename());
-        userService.save(user);
+            } catch (Exception e) {
 
-        // } catch (Exception e) {
+                e.printStackTrace();
 
-        // e.printStackTrace();
-
-        // }
-        // }
+            }
+        }
 
         return "redirect:/userslist";
 
     }
-
-    // PROCEDIMIENTO PARA CREAR UN PRÉSTAMO
-
-    // @GetMapping("/createloan/{id}/{id}")
-    // @PostMapping("/createloan")
-    // // @RequestMapping(value = "/createloan", method = { RequestMethod.GET,
-    // // RequestMethod.POST })
-    // public String createLoan(@ModelAttribute(name = "loan") Loan loan,
-    // Model model
-
-    // ) {
-
-    // // loan.setDeliveryDate(today);
-    // loan.setDueDate(null);
-    // // loan.setUser2(null);
-    // loanService.save(loan);
-
-    // ModelAndView mav = new ModelAndView();
-    // mav.setViewName("loanslist");
-    // mav.addObject("loan", loan);
-
-    // return "redirect:/loanslist";
-    // }
 
     @GetMapping("/newloanuser/{id}")
     public ModelAndView newLoanUser(@PathVariable(name = "id") int id,
@@ -217,9 +196,25 @@ public class MainController {
 
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteUSer(@PathVariable(name = "user") int id) {
-        userService.delete(id);
+    @GetMapping("/deleteuser/{id}")
+    public String deleteUSer(@PathVariable(name = "id") int id) {
+
+        List<Loan> loanlist = loanService.getLoans();
+     
+
+        if (loanlist.size() == 0) {
+            userService.delete(id);
+
+        } else {
+            for (Loan loan : loanlist) {
+                loanService.delete(loan.getId());
+                userService.delete(id);
+
+
+            }
+
+        }
+
         return "redirect:/userslist";
 
     }
@@ -232,21 +227,30 @@ public class MainController {
 
         ModelAndView mav = new ModelAndView();
 
-        for (Loan loan : loanlist) {
+        if (loanlist.size() == 0) {
+            mav.addObject("user", userLoan);
+            mav.setViewName("userdetails");
 
-            if (loan.getUser().equals(userLoan)) {
+        } else {
+
+            for (Loan loan : loanlist) {
+
                 Book book = loan.getBook();
                 int i = book.getId();
+
                 Book b2 = bookService.getBook(i);
 
                 mav.addObject("loansUser", loan);
                 mav.addObject("bookUser", b2);
+                mav.addObject("user", userLoan);
 
                 mav.setViewName("loansuserdetails");
 
             }
 
         }
+        // }
+        // }
 
         return mav;
 
@@ -324,13 +328,6 @@ public class MainController {
 
     // **************************************************+BOOK
     // CONTROLLER************************************/
-
-    @GetMapping("/catalogue")
-    public String getBooks(Model model) {
-
-        model.addAttribute("listaLibros", bookService.getBooks());
-        return "catalogueBs";
-    }
 
     // @GetMapping("/formbook")
     // public String showFormulario(ModelMap map) {
